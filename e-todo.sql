@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `todo` (
   `id` int NOT NULL,
-  `title` varchar(255) NOT NULL,
+  `title` TEXT NOT NULL,
   `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `due_time` datetime NOT NULL,
@@ -45,10 +45,10 @@ CREATE TABLE `todo` (
 
 CREATE TABLE `user` (
   `id` int NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `firstname` varchar(255) NOT NULL,
+  `email` TEXT NOT NULL,
+  `password` TEXT NOT NULL,
+  `name` TEXT NOT NULL,
+  `firstname` TEXT NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
