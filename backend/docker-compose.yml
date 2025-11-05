@@ -1,0 +1,16 @@
+version: "1"
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MRP: admin
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
