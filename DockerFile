@@ -1,4 +1,4 @@
-FROM phpmyadmin:5.2.3-apache
+FROM php:fpm-alpine
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 RUN npm install
