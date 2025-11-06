@@ -1,7 +1,4 @@
-
-
 const mysql = require("mysql")
-
 
 // DÉFINITION DE LA CONNEXION A LA BASE
 const connexion = mysql.createConnection({
@@ -10,7 +7,6 @@ const connexion = mysql.createConnection({
     password: "TonMotDePasse",
     database: "etodo"
 })
-
 
 // CONNEXION A LA BASE DE DONNÉES
 connexion.connect((err) => {
