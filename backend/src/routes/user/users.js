@@ -3,6 +3,8 @@ const rooter = express.Router()
 const connexion = require("../../config/db")
 rooter.use(express.json())
 
+const { deleteuser, updateuser, createuser, getusers, getuserinfosid, getuserinfosemail } = require("./user.query")
+
 // CREER UN UTILISATEUR
 rooter.post("/", (req, res) => {
     const email = req.body.email;
@@ -10,20 +12,11 @@ rooter.post("/", (req, res) => {
     const name = req.body.name;
     const firstname = req.body.firstname;
 
-    connexion.query("INSERT INTO user (`id`, `email`, `password`, `name`, `firstname`) VALUES (NULL,?,?,?,?)", [email, password, name, firstname, ], (err, results) => {
+    createuser(email, password, name, firstname,  (err, results) => {
         if(err) throw err;
         res.json({message: "c'est doog le reuf c ajouté"})
     })
 
-});
-
-
-// LISTE DES UTILISATEURS ET LEURS INFOS 
-rooter.get("/", (req, res) => {
-    connexion.query("SELECT * FROM user", (err, rows) => {
-        if(err) throw err;
-        res.send({message : "les utilisateurs sont : ", rows })
-    })
 });
 
 
@@ -35,7 +28,7 @@ rooter.put("/:id", (req, res) => {
     const name = req.body.name;
     const firstname = req.body.firstname;
 
-    connexion.query("UPDATE user SET email = ?, password = ?, name = ?, firstname = ? WHERE id = ?", [email, password, name, firstname, id], (err, results) => {
+    updateuser(id, email, password, name, firstname, (err, results) => {
         if(err) throw err;
         res.json({message: "utilisateur modifié"})
     })
@@ -45,19 +38,43 @@ rooter.put("/:id", (req, res) => {
 // SUPPRIMER UN UTILISATEUR
 rooter.delete("/:id", (req, res) => {
     const id = req.params.id
-    connexion.query("DELETE FROM user WHERE id = ?", [id], (err, results) => {
+
+    deleteuser(id, (err, results) => {
         if(err) throw err;
         res.json({message: "Utilisateur supprimé"})
     })
 
 });
 
+
+// LISTE DES UTILISATEURS ET LEURS INFOS 
+rooter.get("/", (req, res) => {
+    getusers((err, rows) => {
+        if(err) throw err;
+        res.send({message : "les utilisateurs sont : ", rows })
+    })
+});
+
+
 // RENVOIE LES DONNÉES POUR L'ID DE L'USER
 rooter.get("/:id", (req, res) =>{
     const id = req.params.id
-    connexion.query("SELECT * FROM user WHERE id = ?", [id], (err, rows) =>{
-    if(err) throw err;
-    res.json({message: " les donnes sont : " , rows})
+
+    getuserinfosid(id, (err, rows) =>{
+        if(err) throw err;
+        res.json({message: " les donnes sont : " , rows})
 })
 });
+
+// RENVOIE LES DONNÉES POUR L'EMAIL DE L'USER
+rooter.get("/:email", (req, res) =>{
+    const email = req.params.email
+    
+    getuserinfosemail(email, (err, rows) =>{
+        if(err) throw err;
+        res.json({message: " les donnes sont : " , rows})
+})
+});
+
+
 module.exports = rooter;
