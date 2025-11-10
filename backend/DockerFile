@@ -1,0 +1,14 @@
+FROM node:lts-alpine3.22
+
+WORKDIR /usr/src/app
+
+COPY package.json ./package.json
+
+RUN npm install --quiet
+
+COPY package.json /usr/src/app/ 
+
+EXPOSE 8080
+
+CMD [ "npm", "start" ]
+

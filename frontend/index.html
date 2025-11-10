@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteFlow - Connexion</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+<header>
+  <a href="index.html" class="logo">NoteFlow</a>
+  <button class="menu-toggle" id="menuToggle">☰</button>
+  <nav class="header-right" id="menu">
+    <a href="register.html">Créer un compte</a>
+    <a href="reset.html">Mot de passe oublié</a>
+    <label class="switch">
+      <input type="checkbox" id="themeSwitch">
+      <span class="slider"></span>
+    </label>
+  </nav>
+</header>
+
+<button id="helpBtn" class="help-btn">?</button>
+
+  <main>
+    <form action="localhost:5000/login" class="login-form" id="loginForm" method="POST">
+      <h2 id="h2">Connexion</h2>
+      <input  name="email" type="email" id="email" placeholder="Email" required>
+      <input name="password" type="password" id="password" placeholder="Mot de passe" required>
+      <div class="remember">
+      </div>
+      <button type="submit">Se connecter</button>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
