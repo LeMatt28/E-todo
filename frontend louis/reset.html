@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteFlow - Réinitialiser mot de passe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+<header>
+  <h1><a href="index.html">NoteFlow</a></h1>
+  <button class="menu-toggle">☰</button>
+  <nav id="navLinks">
+    <a href="index.html">Connexion</a>
+    <div class="switch">
+      <input type="checkbox" id="themeSwitch">
+      <label for="themeSwitch" class="slider"></label>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <form id="resetForm">
+    <h2>Mot de passe oublié</h2>
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <button type="submit">Réinitialiser</button>
+  </form>
+</main>
+
+<button id="helpBtn">?</button>
+<div class="help-popup">Besoin d'aide ? Contactez support@noteflow.com</div>
+
+<script src="script.js"></script>
+</body>
+</html>
