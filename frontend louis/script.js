@@ -3,36 +3,27 @@ const themeSwitches = document.querySelectorAll('#themeSwitch');
 
 themeSwitches.forEach(themeSwitch => {
   themeSwitch.addEventListener('change', () => {
-    const darkMode = themeSwitch.checked;
+    document.body.classList.toggle('dark');
+    document.body.style.fontFamily = document.body.classList.contains('dark')
+      ? "'Inter', sans-serif"
+      : "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
 
-    //applique le thème
-    if (darkMode) {
-      document.body.classList.add('dark');
-      document.body.style.fontFamily = "'Inter', sans-serif";
-    } else {
-      document.body.classList.remove('dark');
-      document.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-    }
-
-    //maj tous les switchs
+    //même état pour tous les switch
     themeSwitches.forEach(sw => {
-      sw.checked = darkMode;
+      if (sw !== themeSwitch) sw.checked = themeSwitch.checked;
     });
 
-    //sauvegarde thème
-    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
   });
 });
 
-//applique le thème sauvegardé
+//appliquer le thème stocké
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
     document.body.classList.add('dark');
+    themeSwitches.forEach(sw => sw.checked = true);
     document.body.style.fontFamily = "'Inter', sans-serif";
-    themeSwitches.forEach(sw => {
-      sw.checked = true;
-    });
   }
 });
 
@@ -60,8 +51,7 @@ const forms = document.querySelectorAll('form');
 forms.forEach(form => {
   form.addEventListener('submit', e => {
     e.preventDefault();
-
-    // vérifie le mdp dans le formulaire
+    //vérif mot de passe
     if (form.id === 'registerForm') {
       const pass = form.querySelector('#password').value;
       const confirm = form.querySelector('#confirmPassword').value;
@@ -70,7 +60,6 @@ forms.forEach(form => {
         return;
       }
     }
-
     alert('formulaire envoyé (simulation)');
   });
 });
