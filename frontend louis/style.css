@@ -1,4 +1,4 @@
-/* -------------------- RESET & FONTS -------------------- */
+/*reset & polices */
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +18,7 @@ body.dark {
   font-family: 'Inter', sans-serif;
 }
 
-/* -------------------- HEADER -------------------- */
+/*header */
 header {
   display: flex;
   justify-content: space-between;
@@ -63,7 +63,7 @@ header nav a {
   cursor: pointer;
 }
 
-/* -------------------- THEME SWITCH -------------------- */
+/*switch thème */
 .switch {
   position: relative;
   width: 50px;
@@ -108,7 +108,7 @@ input:checked + .slider:before {
   background-color: #fff;
 }
 
-/* -------------------- MAIN FORM -------------------- */
+/*formulaire principal */
 main {
   display: flex;
   justify-content: center;
@@ -183,7 +183,7 @@ form a:hover {
   text-decoration: underline;
 }
 
-/* -------------------- HELP BUTTON -------------------- */
+/*bouton aide */
 #helpBtn {
   position: fixed;
   bottom: 25px;
@@ -227,7 +227,7 @@ body.dark .help-popup {
   display: block;
 }
 
-/* -------------------- RESPONSIVE -------------------- */
+/*responsive */
 @media(max-width: 768px) {
   .menu-toggle {
     display: block;
