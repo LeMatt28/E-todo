@@ -3,24 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NoteFlow - Inscription</title>
+  <title>NoteFlow - Creer un compte</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="light">
 <header>
-  <a href="index.html" class="logo">NoteFlow</a>
-  <button class="menu-toggle" id="menuToggle">☰</button>
-  <nav class="header-right" id="menu">
-    <a href="index.html">Dejà un compte ?</a>
-    <a href="reset.html">Mot de passe oublié</a>
-    <label class="switch">
+  <h1><a href="index.html">NoteFlow</a></h1>
+  <button class="menu-toggle">☰</button>
+  <nav id="navLinks">
+    <a href="index.html">Connexion</a>
+    <div class="switch">
       <input type="checkbox" id="themeSwitch">
-      <span class="slider"></span>
-    </label>
+      <label for="themeSwitch" class="slider"></label>
+    </div>
   </nav>
 </header>
-
-<button id="helpBtn" class="help-btn">?</button>
 
   <main>
     <form action="http://localhost:8080/user" class="login-form" id="registerForm" method="POST">
@@ -33,6 +30,9 @@
       <button type="submit">S'inscrire</button>
     </form>
   </main>
+
+<button id="helpBtn">?</button>
+<div class="help-popup">Besoin d'aide ? Contactez support@noteflow.com</div>
 
   <script src="script.js"></script>
 </body>

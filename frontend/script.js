@@ -1,40 +1,59 @@
-const themeSwitch = document.getElementById('themeSwitch');
+//thème
+const themeSwitches = document.querySelectorAll('#themeSwitch');
 
-themeSwitch.addEventListener('change', () => {
-    document.body.classList.toggle('dark');
-    document.body.classList.toggle('light');
+themeSwitches.forEach(themeSwitch => {
+  themeSwitch.addEventListener('change', () => {
+    const darkMode = themeSwitch.checked;
 
-    if (document.body.classList.contains('dark')) {
-        localStorage.setItem('theme', 'dark');
+    //applique le thème
+    if (darkMode) {
+      document.body.classList.add('dark');
+      document.body.style.fontFamily = "'Inter', sans-serif";
     } else {
-        localStorage.setItem('theme', 'light');
+      document.body.classList.remove('dark');
+      document.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
     }
+
+//maj tous les switchs
+    themeSwitches.forEach(sw => {
+      sw.checked = darkMode;
+    });
+
+        //sauvegarde thème
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  });
 });
 
+//applique le thème sauvegardé
 window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark');
-        document.body.classList.remove('light');
-        themeSwitch.checked = true;
-    } else {
-        document.body.classList.add('light');
-        document.body.classList.remove('dark');
-        themeSwitch.checked = false;
-    }
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark');
+    document.body.style.fontFamily = "'Inter', sans-serif";
+    themeSwitches.forEach(sw => {
+      sw.checked = true;
+    });
+  }
 });
 
-const menuToggle = document.getElementById('menuToggle');
-const menu = document.getElementById('menu');
+//menu
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.getElementById('navLinks');
+if (menuToggle) {
 
-menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('open');
-});
+    menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
 
+}
+//aide
 const helpBtn = document.getElementById('helpBtn');
-helpBtn.addEventListener('click', () => {
-    alert('Besoin d’aide ? Contactez support@noteflow.com');
-});
+if (helpBtn) {
+  const helpPopup = document.querySelector('.help-popup');
+  helpBtn.addEventListener('click', () => {
+    helpPopup.classList.toggle('show');
+  });
+}
 
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {

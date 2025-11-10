@@ -8,19 +8,16 @@
 </head>
 <body class="light">
 <header>
-  <a href="index.html" class="logo">NoteFlow</a>
-  <button class="menu-toggle" id="menuToggle">☰</button>
-  <nav class="header-right" id="menu">
+  <h1><a href="index.html" class="logo">NoteFlow</a></h1>
+  <button class="menu-toggle">☰</button>
+  <nav id="navLinks">
     <a href="register.html">Créer un compte</a>
-    <a href="reset.html">Mot de passe oublié</a>
-    <label class="switch">
+    <div class="switch">
       <input type="checkbox" id="themeSwitch">
-      <span class="slider"></span>
-    </label>
+      <label for="themeSwitch" class="slider"></label>
+    </div>
   </nav>
 </header>
-
-<button id="helpBtn" class="help-btn">?</button>
 
   <main>
     <form action="localhost:5000/login" class="login-form" id="loginForm" method="POST">
@@ -30,8 +27,12 @@
       <div class="remember">
       </div>
       <button type="submit">Se connecter</button>
+      <a href="reset.html" class="forgot">Mot de passe oublié ?</a>
     </form>
   </main>
+
+<button id="helpBtn">?</button>
+<div class="help-popup">Besoin d'aide ? Contactez support@noteflow.com</div>
 
   <script src="script.js"></script>
 </body>
