@@ -11,3 +11,4 @@ console.log("oui")
 console.log("oui")
 console.log("oui")
 console.log("oui")
+confirm("oui");
