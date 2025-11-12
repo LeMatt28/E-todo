@@ -9,7 +9,7 @@ const connexion = mysql2.createPool({
   database: process.env.MYSQL_DATABASE,
 });
 
-// IIFE juste pour tester la connexion
+// CONNEXION À LA BASE
 (async () => {
   try {
     const [rows] = await connexion.query("SELECT 1");
