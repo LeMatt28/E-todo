@@ -3,6 +3,8 @@ const rooter = express.Router()
 rooter.use(express.json())
 const bcrypt = require("bcryptjs");
 const { getuserinfosemail } = require("../user/user.query");
+const jwt = require("jsonwebtoken")
+
 
 rooter.post("/", async (req, res) => {
     try {
@@ -19,7 +21,11 @@ rooter.post("/", async (req, res) => {
         if (!match) {
             return res.json("Mot de passe incorect")
         } else {
-            return res.json("Bienvenue !")
+            // TOKEN 
+            const secret = process.env.SECRET; 
+            const token = jwt.sign({userID: user.id},secret,{expiresIn:'1h'})
+            console.log(token,"token")
+            // TOKEN
         }
     } catch(err) {
         console.error(err.message)
