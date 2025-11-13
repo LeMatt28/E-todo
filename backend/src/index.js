@@ -29,7 +29,7 @@ const secret = process.env.SECRET;
 app.post("/generaterToken", (req,res)=>{
     const {email,password} = req.body
 
-    const token = jwt.sign({email,password},secret,{expiresIn:'72h'})
+    const token = jwt.sign({email,password},secret,{expiresIn:'1h'})
 
     console.log(token,"token")
     res.status(200).send({message:"generated succesfully", token}) //fait appel à ma fonction token (idem token:token)
