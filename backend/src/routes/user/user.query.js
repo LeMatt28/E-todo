@@ -42,9 +42,9 @@ async function getusers(){
 }
 
 // SQL RECUPERER LES INFOS DU USER EMAIL
-async function getuserinfosemail(id, email){
+async function getuserinfosemail(email){
     try {
-        const [result] = await connexion.execute("SELECT id, email, password FROM user WHERE id =? OR email = ?", [id, email]);
+        const [result] = await connexion.execute("SELECT id, email, password FROM user WHERE email = ?", [email]);
         return result;
     } catch (err){
         throw err;
@@ -54,7 +54,7 @@ async function getuserinfosemail(id, email){
 // SQL RECUPERER LES INFOS DU USER ID
 async function getuserinfosid(id){
     try {
-        const [result] = await connexion.execute("SELECT id, email, password FROM user WHERE id = ?", [id]);
+        const [result] = await connexion.execute("SELECT id, email, password, created_at, name, firstname FROM user WHERE id = ?", [id]);
         return result;
     } catch(err){
         throw err;

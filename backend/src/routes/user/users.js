@@ -35,24 +35,12 @@ rooter.delete("/:id", async (req, res) => {
 });
 
 
-// // LISTE DES UTILISATEURS ET LEURS INFOS 
-// rooter.get("/", async (req, res) => {
-//     try {
-//         const result = await getusers();
-//         res.json({message: " utilisateurs : ", result})
-
-//     } catch(err){
-//         console.log(err);
-//     }
-// });
-
-
 // RENVOIE LES DONNÉES POUR L'ID DE L'USER
 rooter.get("/", token, async (req, res) =>{
     try {
         const id = req.userID
         const result = await getuserinfosid(id);
-        res.json({message: " les donnes sont : ", result})
+        res.json({result})
     } catch(err){
         console.log(err);
     }

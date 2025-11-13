@@ -10,7 +10,7 @@ rooter.post("/", async (req, res) => {
     try {
         const password = req.body.password;
         const email = req.body.email;
-        const users = await getuserinfosemail(null, email);
+        const users = await getuserinfosemail(email);
 
         if (users.length === 0){    
             return res.json("Utilisateur non trouvé");
@@ -23,7 +23,7 @@ rooter.post("/", async (req, res) => {
         } else {
             // TOKEN 
             const secret = process.env.SECRET; 
-            const token = jwt.sign({userID: user.id},secret,{expiresIn:'1h'})
+            const token = jwt.sign({userID: user.id},secret,{expiresIn:'20h'})
             console.log(token,"token")
             // TOKEN
             res.json("c good")
