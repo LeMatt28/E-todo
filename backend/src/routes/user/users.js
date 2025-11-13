@@ -9,23 +9,6 @@ const token = require("../../middleware/auth")
 
 const { deleteuser, updateuser, createuser, getusers, getuserinfosid, getuserinfosemail } = require("./user.query")
 
-// CREER UN UTILISATEUR
-rooter.post("/", async (req, res) => {
-    try {
-        const { email, name, firstname } = req.body;
-        const password = req.body.password
-
-        const salt = await bcrypt.genSalt(10)
-        const hash = await bcrypt.hash(password, salt);
-
-
-        const result = await createuser(email, hash, name, firstname);
-        res.json({ message: "Utilisateur crée avec succès !" });
-        } catch(err) {
-        console.log(err)
-    }
-});
-
 // MODIFIER UN UTILISATEUR
 rooter.put("/:id", async (req, res) => {
     try {
