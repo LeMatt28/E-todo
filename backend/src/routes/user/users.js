@@ -75,17 +75,17 @@ rooter.get("/", token, async (req, res) =>{
     }
 });
 
-// // RENVOIE LES DONNÉES POUR L'EMAIL DE L'USER
-// rooter.get("/:email", async (req, res) =>{
-//     try {
-//         const email = req.params.email
-//         const result = await getuserinfosemail(email);
-//         res.json({message: " les donnes sont : ", result})
+// RENVOIE LES DONNÉES POUR L'EMAIL DE L'USER
+rooter.get("/:email", async (req, res) =>{
+    try {
+        const email = req.params.email // conflit mggggggg
+        const result = await getuserinfosemail(email);
+        res.json({message: " les donnes sont : ", result})
 
-//     } catch(err){
-//         console.log(err);
-//     }
-// });
+    } catch(err){
+        console.log(err);
+    }
+});
 
 
 module.exports = rooter;
