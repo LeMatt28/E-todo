@@ -5,70 +5,62 @@ rooter.use(express.json())
 const bcrypt = require("bcryptjs");
 const token = require("../../middleware/auth")
 
+const { deletetodo, updatetodo, createtodo, gettodos, gettodobyid} = require("../todos/todo.query")
 
-
-const { deleteuser, updateuser, createuser, getusers, getuserinfosid, getuserinfosemail } = require("./user.query")
-
-// MODIFIER UN UTILISATEUR
-rooter.put("/:id", async (req, res) => {
-    try {
-        const id = req.params.id
-        const { email, password, name, firstname } = req.body;
-
-        const result = await updateuserr(id , email, password, name, firstname);
-        res.json({ message: "Utilisateur modifié avec succès !" });
-    } catch(err) {
+// GET TOUTES LES TACHES DE LA TABLE
+rooter.get("/", async (req,res) => {
+    try{
+        const result = await gettodos(id)
+        res.json({result})
+    }catch(err){
         console.log(err)
     }
-});
+})
 
-// SUPPRIMER UN UTILISATEUR
-rooter.delete("/:id", async (req, res) => {
+// GET LA TACHE PAR L'ID
+rooter.get("/:id", async (req,res) => {
+    try{
+        const id = req.params.id
+        const result = await gettodobyid(id)
+        res.json({result})
+    }catch(err){
+        console.log(err)
+    }
+})
+
+// CREER LA TACH
+rooter.post("/", token, async (req,res) => {
+    try{
+        const user_id = req.userID
+        const { title, description, due_time, status} = req.body
+        const result = await createtodo(title, description, due_time, status, user_id)
+        res.json({result})
+    }catch(err){
+        console.log(err)
+    }
+})
+
+// MODIFIER LA TACHE
+rooter.put("/:id", token, async (req,res) => {
+    try{
+        const id = req.params.id
+        const { title, description, due_time, status} = req.body
+        const result = await updatetodo(id,title, description, due_time, status)
+        res.json({result})
+    }catch(err){
+        console.log(err)
+    }
+})
+
+// SUPPRIMER LA TACHE
+rooter.delete("/:id", token, async (req, res) => {
     try {
         const id = req.params.id
-        const result = await deleteuser(id);
-        res.json({ message: "Utilisateur supprimé avec succès !" });
-    } catch (err){
-        console.log(err);
+        const result = await deletetodo(id);
+        return res.json("supprime le s ")
+    }catch(err){
+        console.log(err)
     }
-
-});
-
-
-// // LISTE DES UTILISATEURS ET LEURS INFOS 
-// rooter.get("/", async (req, res) => {
-//     try {
-//         const result = await getusers();
-//         res.json({message: " utilisateurs : ", result})
-
-//     } catch(err){
-//         console.log(err);
-//     }
-// });
-
-
-// RENVOIE LES DONNÉES POUR L'ID DE L'USER
-rooter.get("/", token, async (req, res) =>{
-    try {
-        const id = req.userID
-        const result = await getuserinfosid(id);
-        res.json({message: " les donnes sont : ", result})
-    } catch(err){
-        console.log(err);
-    }
-});
-
-// // RENVOIE LES DONNÉES POUR L'EMAIL DE L'USER
-// rooter.get("/:email", async (req, res) =>{
-//     try {
-//         const email = req.params.email
-//         const result = await getuserinfosemail(email);
-//         res.json({message: " les donnes sont : ", result})
-
-//     } catch(err){
-//         console.log(err);
-//     }
-// });
-
+})
 
 module.exports = rooter;

@@ -5,7 +5,7 @@ const secret = process.env.SECRET;
 function token (req, res, next) { //verifie l'itinairaire
     const token  = req.headers['authorization']; //obtenir la valeur du token ?
     const replaced = token.replace("Bearer ", "");
-    console.log(replaced)
+    console.log("token :\n", replaced)
     try {
         if (replaced){
             const decoded = jwt.verify(replaced, secret); //verifie le jeton

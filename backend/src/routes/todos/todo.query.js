@@ -1,73 +1,71 @@
 const connexion = require("../../config/db")
-// const mysql = require('mysql2/promise');
+const mysql = require('mysql2/promise');
 
-// SQL SUPPRIMER USER
-async function deleteuser(id){
+//CREATE - INSERT POST PUT
+async function createtodo(title, description, due_time, status, user_id){
     try {
-        const [result] = await connexion.execute("DELETE FROM user WHERE id = ?", [id]);
+        const [result] = await connexion.execute("INSERT INTO todo (`title`, `description`,`due_time`, `status`,`user_id`) VALUES (?,?,?,?,?)", [title, description, due_time, status, user_id]);
+        return result;
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+//READ - SELECT GET RÉCUPÈRE TOUT LES TODOS
+async function gettodos(){
+    try {
+        const [result] = await connexion.execute("SELECT * FROM todo");
+        return result;
+    } catch(err){
+        throw err;
+    }
+}
+//RÉCUPÈRE LES INFOS SUR ID
+async function gettodobyid(id){
+    try {
+        const [result] = await connexion.execute("SELECT * FROM todo WHERE id = ?", [id]);
         return result;
     } catch(err){
         throw err;
     }
 }
 
-// SQL MODIFIER USER
-async function updateuser(id , email, password, name, firstname){
+//RÉCUPÈRE LES INFOS SUR ID
+async function gettodobyuserid(user_id){
     try {
-        const [result] = await connexion.execute("UPDATE user SET email = ?, password = ?, name = ?, firstname = ? WHERE id = ?", [email, password, name, firstname, id]);
+        const [result] = await connexion.execute("SELECT * FROM todo WHERE user_id = ?", [user_id]);
         return result;
     } catch(err){
         throw err;
     }
 }
 
-// SQL CREER USER
- async function createuser(email, hash, name, firstname){
+//UPDATE - UPDATE PUT
+async function updatetodo(id, title, description, due_time, status){
     try {
-        const [result] = await connexion.execute("INSERT INTO user (`id`, `email`, `password`, `name`, `firstname`) VALUES (NULL,?,?,?,?)", [email, hash, name, firstname])
+        const [result] = await connexion.execute("UPDATE todo SET title = ?, description = ?, due_time = ?, status = ? where id = ?", [title, description, due_time,status, id]);
         return result;
     } catch(err){
         throw err;
     }
 }
 
-// SQL RECUPERER TOUT LES USERS
-async function getusers(){
+//DELETE - DELETE ..
+async function deletetodo(id){
     try {
-        const [result] = await connexion.execute("SELECT * FROM user");
+        const [result] = await connexion.execute("DELETE FROM todo WHERE id = ?", [id]);
         return result;
     } catch(err){
         throw err;
     }
 }
-
-// SQL RECUPERER LES INFOS DU USER EMAIL
-async function getuserinfosemail(id, email){
-    try {
-        const [result] = await connexion.execute("SELECT id, email, password FROM user WHERE id =? OR email = ?", [id, email]);
-        return result;
-    } catch (err){
-        throw err;
-    }
-}
-
-// SQL RECUPERER LES INFOS DU USER ID
-async function getuserinfosid(id){
-    try {
-        const [result] = await connexion.execute("SELECT id, email, password FROM user WHERE id = ?", [id]);
-        return result;
-    } catch(err){
-        throw err;
-    }
-}
-
-
 
 module.exports = {
-    deleteuser,
-    updateuser,
-    createuser,
-    getusers,
-    getuserinfosid,
-    getuserinfosemail
+    gettodos,
+    gettodobyid,
+    deletetodo,
+    updatetodo,
+    createtodo,
+    gettodobyuserid
 }
