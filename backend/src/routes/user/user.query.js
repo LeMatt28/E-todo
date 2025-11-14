@@ -1,5 +1,5 @@
 const connexion = require("../../config/db")
-// const mysql = require('mysql2/promise');
+const mysql = require('mysql2/promise');
 
 // SQL SUPPRIMER USER
 async function deleteuser(id){
@@ -24,7 +24,7 @@ async function updateuser(id , email, password, name, firstname){
 // SQL CREER USER
  async function createuser(email, hash, name, firstname){
     try {
-        const [result] = await connexion.execute("INSERT INTO user (`id`, `email`, `password`, `name`, `firstname`) VALUES (NULL,?,?,?,?)", [email, hash, name, firstname])
+        const [result] = await connexion.execute("INSERT INTO user (`email`, `password`, `name`, `firstname`) VALUES (?,?,?,?)", [email, hash, name, firstname])
         return result;
     } catch(err){
         throw err;

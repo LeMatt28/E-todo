@@ -7,7 +7,8 @@ const token = require("../../middleware/auth")
 
 
 
-const { deleteuser, updateuser, createuser, getusers, getuserinfosid, getuserinfosemail } = require("./user.query")
+const { deleteuser, updateuser, createuser, getusers, getuserinfosid, getuserinfosemail } = require("./user.query");
+const { gettodobyuserid } = require("../todos/todo.query");
 
 // MODIFIER UN UTILISATEUR
 rooter.put("/:id", async (req, res) => {
@@ -40,6 +41,17 @@ rooter.get("/", token, async (req, res) =>{
     try {
         const id = req.userID
         const result = await getuserinfosid(id);
+        res.json({result})
+    } catch(err){
+        console.log(err);
+    }
+});
+
+// RENVOIE LES DONNÉES POUR L'ID DE L'USER
+rooter.get("/todos", token, async (req, res) =>{
+    try {
+        const user_id = req.userID
+        const result = await gettodobyuserid(user_id);
         res.json({result})
     } catch(err){
         console.log(err);
