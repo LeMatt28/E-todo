@@ -23,7 +23,7 @@ rooter.post("/", async (req, res) => {
         } else {
             // TOKEN 
             const secret = process.env.SECRET; 
-            const token = jwt.sign({userID: user.id},secret,{expiresIn:'1h'})
+            const token = jwt.sign({userID: user.id},secret,{expiresIn:'92h'})
             console.log(token,"token")
             // TOKEN
         }
