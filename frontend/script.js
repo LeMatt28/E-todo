@@ -56,10 +56,9 @@ if (helpBtn) {
 }
 
 const loginForm = document.getElementById('loginForm');
-if (loginForm) {
+
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
  
@@ -67,12 +66,14 @@ if (loginForm) {
             alert('Veuillez remplir tous les champs.');
             return;}
         try {
-
             const res = await fetch("http://localhost:5000/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password})
             });
+            if(!res){
+              console.log("err")
+            }
             const data = await res.json();
             document.getElementById("h2").innerHTML = data;
 
@@ -81,7 +82,7 @@ if (loginForm) {
             alert("Une erreur est survenue lors de la création du compte.");
         }
     });
-}
+
 
 const registerForm = document.getElementById('registerForm');
 

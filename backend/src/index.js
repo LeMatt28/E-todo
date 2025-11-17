@@ -16,11 +16,11 @@ const reg = require("./routes/register/reg")
 const user = require("./routes/user/users") 
 const login = require("./routes/auth/auth")
 const todos = require("./routes/todos/todo")
-const token = require("./middleware/auth")
+const token = require("./middleware/VerifToken")
 app.use("/register", reg) 
-app.use("/user", token, user)
 app.use("/login", login)
-app.use("/todos", token, todos)
+app.use(user)
+app.use("/todos", todos)
 
 // REPONSE DU SERVEUR
 app.get("/", (req,res) =>{

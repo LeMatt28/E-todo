@@ -3,12 +3,12 @@ const rooter = express.Router()
 const connexion = require("../../config/db")
 rooter.use(express.json())
 const bcrypt = require("bcryptjs");
-const token = require("../../middleware/auth")
+const token = require("../../middleware/VerifToken")
 
 const { deletetodo, updatetodo, createtodo, gettodos, gettodobyid} = require("../todos/todo.query")
 
 // GET TOUTES LES TACHES DE LA TABLE
-rooter.get("/", async (req,res) => {
+rooter.get("/", token, async (req,res) => {
     try{
         const result = await gettodos(id)
         res.json({result})
