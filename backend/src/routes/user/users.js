@@ -7,7 +7,7 @@ const token = require("../../middleware/auth")
 
 
 
-const { deleteuser, updateuser, createuser, getusers, getuserinfosid, getuserinfosemail } = require("./user.query");
+const { deleteuser, updateuser, getuserinfosid} = require("./user.query");
 const { gettodobyuserid } = require("../todos/todo.query");
 
 // MODIFIER UN UTILISATEUR
@@ -16,7 +16,7 @@ rooter.put("/:id", async (req, res) => {
         const id = req.params.id
         const { email, password, name, firstname } = req.body;
 
-        const result = await updateuserr(id , email, password, name, firstname);
+        const result = await updateuser(id , email, password, name, firstname);
         res.json({ message: "Utilisateur modifié avec succès !" });
     } catch(err) {
         console.log(err)
@@ -58,17 +58,17 @@ rooter.get("/todos", token, async (req, res) =>{
     }
 });
 
-// // RENVOIE LES DONNÉES POUR L'EMAIL DE L'USER
-// rooter.get("/:email", async (req, res) =>{
-//     try {
-//         const email = req.params.email
-//         const result = await getuserinfosemail(email);
-//         res.json({message: " les donnes sont : ", result})
+// RENVOIE LES DONNÉES POUR L'EMAIL DE L'USER
+rooter.get("/:email", async (req, res) =>{
+    try {
+        const email = req.params.email
+        const result = await getuserinfosemail(email);
+        res.json({message: " les donnes sont : ", result})
 
-//     } catch(err){
-//         console.log(err);
-//     }
-// });
+    } catch(err){
+        console.log(err);
+    }
+});
 
 
 module.exports = rooter;
