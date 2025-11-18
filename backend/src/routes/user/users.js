@@ -17,9 +17,9 @@ rooter.put("/:id", async (req, res) => {
         const { email, password, name, firstname } = req.body;
 
         const result = await updateuser(id , email, password, name, firstname);
-        res.json({ message: "Utilisateur modifié avec succès !" });
+        res.status.json({ message: "Utilisateur modifié avec succès !" });
     } catch(err) {
-        console.log(err)
+        res.status(500).json({result});
     }
 });
 
@@ -28,9 +28,9 @@ rooter.delete("/:id", async (req, res) => {
     try {
         const id = req.params.id
         const result = await deleteuser(id);
-        res.json({ message: "Utilisateur supprimé avec succès !" });
+        res.status.json({ message: "Utilisateur supprimé avec succès !" });
     } catch (err){
-        console.log(err);
+        res.status(500).json({result});
     }
 
 });
@@ -41,9 +41,9 @@ rooter.get("/", token, async (req, res) =>{
     try {
         const id = req.userID
         const result = await getuserinfosid(id);
-        res.json({result})
+        res.status().json({result})
     } catch(err){
-        console.log(err);
+        res.status(500).json({result});
     }
 });
 
@@ -52,9 +52,9 @@ rooter.get("/todos", token, async (req, res) =>{
     try {
         const user_id = req.userID
         const result = await gettodobyuserid(user_id);
-        res.json({result})
+        res.status().json({result})
     } catch(err){
-        console.log(err);
+        res.status(500).json({result});
     }
 });
 
@@ -63,10 +63,9 @@ rooter.get("/:email", async (req, res) =>{
     try {
         const email = req.params.email
         const result = await getuserinfosemail(email);
-        res.json({message: " les donnes sont : ", result})
-
+        res.status().json({message: " les donnes sont : ", result})
     } catch(err){
-        console.log(err);
+        res.status(500).json({reuslt});
     }
 });
 

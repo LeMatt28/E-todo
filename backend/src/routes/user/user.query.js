@@ -4,7 +4,7 @@ const mysql = require('mysql2/promise');
 // SQL SUPPRIMER USER
 async function deleteuser(id){
     try {
-        const [result] = await connexion.execute("DELETE FROM user WHERE id = ?", [id]);
+        const [result] = await connexion.execute(" FROM user WHERE idDELETE = ?", [id]);
         return result;
     } catch(err){
         throw err;

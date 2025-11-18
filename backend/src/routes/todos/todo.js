@@ -11,9 +11,9 @@ const { deletetodo, updatetodo, createtodo, gettodos, gettodobyid} = require("..
 rooter.get("/", async (req,res) => {
     try{
         const result = await gettodos(id)
-        res.json({result})
+        res.status(200).json({result})
     }catch(err){
-        console.log(err)
+        res.status(500).json({result})
     }
 })
 
@@ -22,9 +22,9 @@ rooter.get("/:id", async (req,res) => {
     try{
         const id = req.params.id
         const result = await gettodobyid(id)
-        res.json({result})
+        res.status(200).json({result})
     }catch(err){
-        console.log(err)
+        res.status(500).json({result})
     }
 })
 
@@ -34,9 +34,9 @@ rooter.post("/", token, async (req,res) => {
         const user_id = req.userID
         const { title, description, due_time, status} = req.body
         const result = await createtodo(title, description, due_time, status, user_id)
-        res.json({result})
+        res.status(200).json({result})
     }catch(err){
-        console.log(err)
+        res.status(500).json({result})
     }
 })
 
@@ -46,9 +46,9 @@ rooter.put("/:id", token, async (req,res) => {
         const id = req.params.id
         const { title, description, due_time, status} = req.body
         const result = await updatetodo(id,title, description, due_time, status)
-        res.json({result})
+        res.status(200).json({result})
     }catch(err){
-        console.log(err)
+        res.status(500).json({result})
     }
 })
 
@@ -57,9 +57,9 @@ rooter.delete("/:id", token, async (req, res) => {
     try {
         const id = req.params.id
         const result = await deletetodo(id);
-        return res.json("supprime le s ")
+        return res.status(200).json({result,message : "supprime le s " });
     }catch(err){
-        console.log(err)
+        res.status(500).json({result})
     }
 })
 

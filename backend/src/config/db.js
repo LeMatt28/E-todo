@@ -15,7 +15,7 @@ const connexion = mysql2.createPool({
     const [rows] = await connexion.query("SELECT 1");
     console.log("✅AAAAAAAAAAA");
   } catch (err) {
-    console.error("❌ Erreur :", err.message);
+    console.error("❌ Erreur :", err.message); 
   }
 })();
 
