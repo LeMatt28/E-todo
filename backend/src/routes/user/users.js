@@ -65,7 +65,7 @@ rooter.get("/:email", async (req, res) =>{
         const result = await getuserinfosemail(email);
         res.status().json({message: " les donnes sont : ", result})
     } catch(err){
-        res.status(500).json({reuslt});
+        res.status(500).json({result});
     }
 });
 

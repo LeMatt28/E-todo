@@ -19,10 +19,10 @@ rooter.post("/", async (req, res) => {
 
 
             const result = await createuser(email, hash, name, firstname);
-            return res.json("Compte crée avec succès !");
+            return res.json("Compte crée avec succès !"); //res.status(201).json({message: "Compte créée avec succès !"});
         }
         } catch(err) {
-        console.log(err)
+        res.status(500).json({result})
     }
 });
 module.exports = rooter;

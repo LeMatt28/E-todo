@@ -26,10 +26,10 @@ rooter.post("/", async (req, res) => {
             const token = jwt.sign({userID: user.id},secret,{expiresIn:'20h'})
             console.log(token,"token")
             // TOKEN
-            res.json("c good")
+            res.json("c good") //res.status(200).json({result})
         }
     } catch(err) {
-        console.error(err.message)
+        res.status(419).json({result})
     }
 })
 

@@ -16,7 +16,7 @@ function token (req, res, next) { //verifie l'itinairaire
             res.json("bah nn tu passe pas");
         }
     } catch(err) {
-        console.error(err.message)
+        res.status(419).json({result}); //419 jeton manquant ou expiré
     }
 };
 
