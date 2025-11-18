@@ -1,16 +1,39 @@
 services:
-  db:
+  # ----------------------------------------------------------------------- BACK -----------------------------------------------------------------------
+  mysql_db:
     image: mysql
     restart: always
     environment:
-      MYSQL_DATABASE: "etodo"
+      MYSQL_DATABASE: e-todo
       MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: mathias
+      MYSQL_PASSWORD: teste
+
     volumes:
       - ./e-todo.sql:/docker-entrypoint-initdb.d/e-todo.sql
 
-  api:
-    build: .
-    depends_on:
-      - db
+    networks:
+      - back
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
     ports:
-      - "8080:8080"
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+
+    networks:
+      - back
+
+    depends_on:
+      - mysql_db
+
+networks:
+  back:
+    driver: bridge
+# ----------------------------------------------------------------------- BACK -----------------------------------------------------------------------
+
+# ----------------------------------------------------------------------- FRONT -----------------------------------------------------------------------
+# ----------------------------------------------------------------------- FRONT -----------------------------------------------------------------------
+
