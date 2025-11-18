@@ -35,7 +35,8 @@ rooter.post("/", async (req, res) => {
 
 module.exports = rooter;
 
-
+//419 jeton manquant ou expiré
+//499 jeton requis, indique que le jeton n'est pas requis
 
 
 

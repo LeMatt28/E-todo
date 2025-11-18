@@ -16,8 +16,11 @@ function token (req, res, next) { //verifie l'itinairaire
             res.json("bah nn tu passe pas");
         }
     } catch(err) {
-        res.status(419).json({result}); //419 jeton manquant ou expiré
+        res.status(419).json({result}); 
     }
 };
 
 module.exports = token
+
+//419 jeton manquant ou expiré
+//499 jeton requis, indique que le jeton n'est pas requis
