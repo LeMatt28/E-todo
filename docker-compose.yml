@@ -3,6 +3,8 @@ services:
   mysql_db:
     image: mysql
     restart: always
+    ports:
+      - 3033:3033
     environment:
       MYSQL_DATABASE: e-todo
       MYSQL_ROOT_PASSWORD: admin
