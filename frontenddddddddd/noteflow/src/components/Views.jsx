@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import TableView from './components/views/TableView.jsx';
-import TimelineView from './components/Views/TimelineView.jsx'
-import KanbanView from './components/views/KanbanView.jsx'
+import TableView from './views/TableView.jsx';
+import TimelineView from './views/TimelineView.jsx';
+import KanbanView from './views/KanbanView.jsx';
+
 
 export default function Views({ tasks, updateTask, removeTask, moveTask }){
   const [view, setView] = useState('table')
