@@ -1,0 +1,26 @@
+{
+  "name": "b-web-101-mar-1-1-etodo-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EpitechBachelorPromo2028/B-WEB-101-MAR-1-1-etodo-3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EpitechBachelorPromo2028/B-WEB-101-MAR-1-1-etodo-3/issues"
+  },
+  "homepage": "https://github.com/EpitechBachelorPromo2028/B-WEB-101-MAR-1-1-etodo-3#readme"
+}
