@@ -4,11 +4,11 @@ services:
     image: mysql
     restart: always
     ports:
-      - 3033:3033
+      - 3306:3306
     environment:
       MYSQL_DATABASE: etodo
       MYSQL_ROOT_PASSWORD: TonMotDePasse
-      MYSQL_USER: root
+      MYSQL_USER: user
       MYSQL_PASSWORD: TonMotDePasse
 
     volumes:
