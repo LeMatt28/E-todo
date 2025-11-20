@@ -13,14 +13,13 @@ const { gettodobyuserid } = require("../todos/todo.query");
 // MODIFIER UN UTILISATEUR
 rooter.put("/users/:id", token, async (req, res) => {
     try {
-        console.log("update")
         const id = req.headers.id
         const { email, password, name, firstname } = req.body;
 
         const result = await updateuser(id , email, password, name, firstname);
-        res.json({ message: "Utilisateur modifié avec succès !" });
+        res.status(200).json({ message: "Utilisateur modifié avec succès !" });
     } catch(err) {
-        console.log(err)
+        res.status(500).json(err);
     }
 });
 
@@ -29,9 +28,9 @@ rooter.delete("/users/:id", token, async (req, res) => {
     try {
         const id = req.params.id
         const result = await deleteuser(id);
-        res.json({ message: "Utilisateur supprimé avec succès !" });
+        res.status(200).json({ message: "User succefully deleted !" });
     } catch (err){
-        console.log(err);
+        res.status(500).json(err);
     }
 
 });
@@ -42,9 +41,9 @@ rooter.get("/user", token, async (req, res) =>{
     try {
         const id = req.userID
         const result = await getuserinfosid(id);
-        res.json({result})
+        res.status(200).json({result})
     } catch(err){
-        console.log(err);
+        res.status(500).json(err);
     }
 });
 
@@ -54,51 +53,30 @@ rooter.get("/user/todos", token, async (req, res) =>{
     try {
         const user_id = req.userID
         const result = await gettodobyuserid(user_id);
-        res.json({result})
+        res.status(200).json({result})
     } catch(err){
-        console.log(err);
+        res.status(500).json(err);
     }
 });
 
 rooter.get("/users/:param", token, async (req, res) => {
-  const param = req.params.param;
-  let result;
+    try {
+        const param = req.params.param;
+        let result;
 
-  if (param.includes("@")) {
-    // C'est un email
-    result = await getuserinfosemail(param);
-  } else {
-    // C'est un id
-    result = await getuserinfosid(param);
-  }
+        if (param.includes("@")) {
+            // C'est un email
+            result = await getuserinfosemail(param);
+        } else {
+            // C'est un id
+            result = await getuserinfosid(param);
+        }
 
-  res.json({ message: "les données sont :", result });
+        res.status(200).json({ message: "les données sont :", result });
+    } catch(err){
+        res.status(500).json(err)
+    }
 });
-
-// // RENVOIE LES DONNÉES POUR L'EMAIL DE L'USER
-// rooter.get("/users/:email", async (req, res) =>{
-//     try {
-//         const email = req.params.email
-//         const result = await getuserinfosemail(email);
-//         res.json({message: " les donnes sont : ", result})
-
-//     } catch(err){
-//         console.log(err);
-//     }
-// });
-
-// // RENVOIE LES DONNÉES POUR L'ID EN PARAMS DE L'USER
-// rooter.get("/users/:id", async (req, res) =>{
-//     try {
-//         const id = req.params.id
-//         const result = await getuserinfosid(id);
-//         res.json({message: " les donnes sont : ", result})
-
-//     } catch(err){
-//         console.log(err);
-//     }
-// });
-
 
 
 module.exports = rooter;

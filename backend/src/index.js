@@ -26,6 +26,28 @@ app.use("/todos", todos)
 app.get("/", (req,res) =>{
     res.send("weeeeesh")
 })
+
+app.use(express.static(__dirname + "/../../frontend"));
+
+
+app.get("/login", (req,res) =>{
+res.sendFile("index.html", {root: __dirname + "/../../frontend"});
+    
+})
+
+app.get("/dashboard", token ,(req,res) =>{
+    console.log("Test")
+    res.sendFile("oui.html", {root: __dirname + "/../../frontend"});
+    
+})
+
+app.get("/register", (req,res) =>{
+    res.sendFile("register.html", {root: __dirname + "/../../frontend"});
+    
+})
+
+
+
 app.listen(port, () => {
-    console.log("serveur ca marche le s")
+    console.log("Server is running...")
 })

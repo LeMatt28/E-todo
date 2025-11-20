@@ -13,10 +13,10 @@ function token (req, res, next) { //verifie l'itinairaire
             next();
 
         } else { //réponse négative, donc erreur
-            res.json("bah nn tu passe pas");
+            res.status(401).json("no authorization");
         }
     } catch(err) {
-        console.error(err.message)
+        res.status(419).json(err); 
     }
 };
 
