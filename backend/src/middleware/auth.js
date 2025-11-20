@@ -24,3 +24,5 @@ module.exports = token
 
 //419 jeton manquant ou expiré
 //499 jeton requis, indique que le jeton n'est pas requis
+
+//const token = req.headers.authorization.split(" ")
