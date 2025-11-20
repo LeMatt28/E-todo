@@ -5,9 +5,17 @@ const mysql2 = require("mysql2/promise");
 const connexion = mysql2.createPool({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_ROOT_PASSWORD,
+  password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
 });
+
+console.log(
+  process.env.MYSQL_HOST,
+  process.env.MYSQL_USER,
+  process.env.MYSQL_PASSWORD,
+  process.env.MYSQL_DATABASE
+);
+
 
 // CONNEXION À LA BASE
 (async () => {
