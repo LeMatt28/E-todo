@@ -2,15 +2,10 @@ services:
   # ----------------------------------------------------------------------- SQL -----------------------------------------------------------------------
   mysql_db:
     image: mysql
-    container_name: mysql
     restart: always
     ports:
       - 3306:3306
-    environment:
-      MYSQL_DATABASE: e-todo
-      MYSQL_ROOT_PASSWORD: TonMotDePasse
-      MYSQL_USER: user
-      MYSQL_PASSWORD: TonMotDePasse
+
 
     volumes:
       - ./e-todo.sql:/docker-entrypoint-initdb.d/e-todo.sql
@@ -25,10 +20,13 @@ services:
     ports:
       - 8080:80
     environment:
-      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql_db
 
     depends_on:
       - mysql_db
+
+    networks:
+      - back
 
   # ----------------------------------------------------------------------- SQL -----------------------------------------------------------------------
 
