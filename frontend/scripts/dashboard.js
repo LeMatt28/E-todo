@@ -24,7 +24,7 @@ let currentView = 'kanban';
 
 // ------ Render Kanban
 function renderKanban() {
-  ['todo','doing','done'].forEach(status=>{
+  ['todo','in progress','done'].forEach(status=>{
     let col = document.getElementById(status);
     col.innerHTML = '';
     tasks.filter(t=>t.status === status).forEach(task=>{
@@ -170,12 +170,10 @@ function deleteTask(id){
     .then(data => {
         tasks = tasks.filter(t=>t.id!==id);
         showToast("Tâche supprimée !");
-        renderAll();
-
-    })
-  }
+        renderAll()
   closeTaskModal();
-
+})
+}
 
 function moveTask(id, newStatus){
   let t = tasks.find(t=>t.id===id);
@@ -236,6 +234,3 @@ function showToast(message, ok=true){
   document.body.appendChild(toast);
   setTimeout(()=>{ toast.remove(); },1500);
 }
-
-// Init
-// window.onload = renderAll;
