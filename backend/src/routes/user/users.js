@@ -25,6 +25,12 @@ rooter.put("/users/:id", token, async (req, res) => {
 
 // SUPPRIMER UN UTILISATEUR
 rooter.delete("/users/:id", token, async (req, res) => {
+    if (isNaN(id)){
+        const err = new Error ("Bad parameter");
+        err.status = 400;
+        return next(err);
+        
+    }
     try {
         const id = req.params.id
         const result = await deleteuser(id);

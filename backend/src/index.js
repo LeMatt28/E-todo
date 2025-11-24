@@ -35,7 +35,7 @@ res.sendFile("index.html", {root: __dirname + "/../../frontend"});
     
 })
 
-app.get("/dashboard", token ,(req,res) =>{
+app.get("/oui.html", token ,(req,res) =>{
     console.log("Test")
     res.sendFile("oui.html", {root: __dirname + "/../../frontend"});
     
@@ -47,6 +47,34 @@ app.get("/register", (req,res) =>{
 })
 
 
+app.use((req, res, next) => {
+    const err = new Error("Not found");
+    err.status = 404;
+    next(err); // passe au middleware global d’erreurs
+});
+
+
+app.use(function(err,req,res,next) {
+    console.error(err);
+        if (err.code === "NO_TOKEN"){
+            return res.status(401).json({message: "No token, authorization denied"})
+        }
+        if (err.code === "INVALID_TOKEN"){
+            return res.status(401).json({message: "Token is not valid"})
+
+        }
+        if (err.status === 404) {
+            return res.status(404).json({message: "Not found"})
+
+        }
+        if (err.status === 400) {
+            return res.status(400).json({message: "Bad parameter"})
+
+        } else {
+            return res.status(500).json({message: "Internal server error"})
+
+        }
+})
 
 app.listen(port, () => {
     console.log("Server is running...")

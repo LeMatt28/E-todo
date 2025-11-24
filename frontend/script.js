@@ -60,7 +60,7 @@ if (helpBtn) {
 const loginForm = document.getElementById('loginForm');
 
 if (loginForm) {
-  loginForm.addEventListener('submit', async (e) => {
+  loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -69,37 +69,31 @@ if (loginForm) {
       alert('Veuillez remplir tous les champs.');
       return;
     }
-    try {
-      const res = await fetch("http://localhost:5000/login", {
+   
+       fetch("http://localhost:5000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
-      });
+      })
+      .then(async res => {
         const data = await res.json();
+        document.getElementById("h2").innerHTML = data
+        console.log(data)
+        if (!data.token) {
+          return console.error("Token JWT manquant")
+        }
         localStorage.setItem('token', data.token);
 
-        const token = localStorage.getItem("token")
-        console.log(token)
+        window.location.href = "http://localhost:5000/oui.html"
 
-        const Res = await fetch("http://localhost:5000/dashboard", {
-          method: "GET",
-          headers: { 'Authorization': `Bearer ${token}` },
-        })
-        document.location.href = "http://localhost:5000/dashboard"
-        // const html = await Res.text();
-        // document.open();
-        // document.write(html);
-        // document.close();
-
-      window.addEventListener("load", (event) => {
-      console.log("page is fully loaded");
-      });
-
-
-    } catch (err) {
-      console.error(err);
-      alert("Une erreur est survenue lors de la connexxion.");
-    }
+        
+      })
+      .catch(err => {
+        if (err) {
+          console.error(err)
+          alert("Erreur d'authentification")
+        }
+      })
   });
 }
 
