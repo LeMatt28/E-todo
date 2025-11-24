@@ -2,11 +2,12 @@ services:
   # ----------------------------------------------------------------------- SQL -----------------------------------------------------------------------
   mysql_db:
     image: mysql
+    container_name: mysql
     restart: always
     ports:
       - 3306:3306
     environment:
-      MYSQL_DATABASE: etodo
+      MYSQL_DATABASE: e-todo
       MYSQL_ROOT_PASSWORD: TonMotDePasse
       MYSQL_USER: user
       MYSQL_PASSWORD: TonMotDePasse
@@ -19,14 +20,12 @@ services:
 
   phpmyadmin:
     image: phpmyadmin
+    container_name: phpmyadmin
     restart: always
     ports:
       - 8080:80
     environment:
       - PMA_ARBITRARY=1
-
-    networks:
-      - back
 
     depends_on:
       - mysql_db
@@ -40,22 +39,23 @@ services:
     container_name: backend_etodo
     ports:
       - "4000:4000"
-    stdin_open: true
-    tty: true
+
+    networks:
+      - back
 
     depends_on:
       - mysql_db
   # ----------------------------------------------------------------------- BACK -----------------------------------------------------------------------
 
   # ----------------------------------------------------------------------- FRONT -----------------------------------------------------------------------
-  # frontend:
-  #   build: ./frontend
-  #   container_name: frontend_etodo
-  #   ports:
-  #     - "3000:3000"
+  frontend:
+    build: ./frontend
+    container_name: frontend_etodo
+    ports:
+      - "3000:3000"
 
-  #   depends_on:
-  #     - backend
+    depends_on:
+      - backend
 # ----------------------------------------------------------------------- FRONT -----------------------------------------------------------------------
 
 networks:
