@@ -5,8 +5,7 @@ services:
     restart: always
     ports:
       - 3306:3306
-
-
+      
     volumes:
       - ./e-todo.sql:/docker-entrypoint-initdb.d/e-todo.sql
 
