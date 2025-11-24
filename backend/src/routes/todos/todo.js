@@ -34,7 +34,13 @@ rooter.post("/", token, async (req,res) => {
         const user_id = req.userID
         const { title, description, due_time, status} = req.body
         const result = await createtodo(title, description, due_time, status, user_id)
-        res.status(200).json({result})
+        res.status(200).json({
+            id: result.insertId,
+            title,
+            description,
+            due_time,
+            status
+        })
     }catch(err){
         res.status(500).json(err)
     }
@@ -46,7 +52,13 @@ rooter.put("/:id", token, async (req,res) => {
         const id = req.params.id
         const { title, description, due_time, status} = req.body
         const result = await updatetodo(id,title, description, due_time, status)
-        res.status(200).json({result})
+        res.status(200).json({
+            id: id,
+            title,
+            description,
+            due_time,
+            status
+        })
     }catch(err){
         res.status(500).json(err)
     }

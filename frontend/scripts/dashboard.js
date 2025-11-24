@@ -1,27 +1,19 @@
 const token = localStorage.getItem("token")
 console.log(token)
 
-// fetch("http://localhost:5000/user/todos", {
-//     method: "GET",
-//     headers: { 'Authorization': `Bearer ${token}` },
-// })
-// .then(async res => {
-//         const data = await res.json();
-//         const container = document.getElementById("h1");
-// container.innerHTML = ""; 
+window.onload = () => {
+    fetch("http://localhost:5000/user/todos", {
+    method: "GET",
+    headers: { 'Authorization': `Bearer ${token}` },
+})
+    .then(res => res.json())
+    .then(data => {
+        // tasks.push(data);
+        tasks = data.result || [];
+        renderAll();
 
-// data.result.forEach(todo => {
-//     container.innerHTML += `
-//             Title : ${todo.title}<br>
-//             Description : ${todo.description}<br>
-//             Due time: ${todo.due_time}<br>
-//             Status : ${todo.status}<br>
-//     `;
-// });
-
-// });
-
-
+    })
+}
 
 
 // Data model
@@ -113,10 +105,34 @@ function saveTask(){
   let color = document.getElementById('taskColor').value;
   if(!title) return showToast("Titre obligatoire !", false);
   if(editedTaskId){
-    let t = tasks.find(t=>t.id===editedTaskId);
-    t.title = title; t.description = description; t.color = color; t.due_time = due_time
-    showToast("Tâche modifiée !");
-    renderAll();
+    fetch(`http://localhost:5000/todos/${editedTaskId}`, {
+        method: "PUT",
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: title,
+            description: description,
+            due_time: due_time,
+            status: currentStatus
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        showToast("Tâche modifiée !");
+        let t = tasks.find(t=>t.id===editedTaskId);
+        t.title = title; 
+        t.description = description; 
+        t.color = color;
+        t.due_time = due_time
+
+        
+        renderAll();
+
+    })
+  closeTaskModal();
+  
   } else {
     fetch("http://localhost:5000/todos", {
         method: "POST",
@@ -131,23 +147,36 @@ function saveTask(){
             status: currentStatus
         })
     })
-            .then(async res => {
-                const data = await res.json();
-                console.log(data)
-                showToast("Tâche ajoutée !");
-                tasks.push(data);
-                renderAll();
+    .then(res => res.json())
+    .then(data => {
+        showToast("Tâche ajoutée !");
+        tasks.push(data);
+        renderAll();
 
-            })
-}
-closeTaskModal();
+    })
+  }
+  closeTaskModal();
 }
 function editTask(id){ openTaskModal(null, id);}
 function deleteTask(id){
-  tasks = tasks.filter(t=>t.id!==id);
-  showToast("Tâche supprimée !");
-  renderAll();
-}
+    fetch(`http://localhost:5000/todos/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        tasks = tasks.filter(t=>t.id!==id);
+        showToast("Tâche supprimée !");
+        renderAll();
+
+    })
+  }
+  closeTaskModal();
+
+
 function moveTask(id, newStatus){
   let t = tasks.find(t=>t.id===id);
   t.status = newStatus;
@@ -209,4 +238,4 @@ function showToast(message, ok=true){
 }
 
 // Init
-window.onload = renderAll;
+// window.onload = renderAll;
