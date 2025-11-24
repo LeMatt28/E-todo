@@ -1,54 +1,42 @@
-//thème
+// Thème (dark/light)
 const themeSwitches = document.querySelectorAll('#themeSwitch');
-// const bodyParser = require('body-parser')
-
-
 themeSwitches.forEach(themeSwitch => {
   themeSwitch.addEventListener('change', () => {
     const darkMode = themeSwitch.checked;
-
-    //applique le thème
     if (darkMode) {
       document.body.classList.add('dark');
       document.body.style.fontFamily = "'Inter', sans-serif";
     } else {
       document.body.classList.remove('dark');
-      document.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+      document.body.style.fontFamily = "'Fira Mono', 'Roboto Mono', 'Courier New', monospace";
     }
-
-    //maj tous les switchs
-    themeSwitches.forEach(sw => {
-      sw.checked = darkMode;
-    });
-
-    //sauvegarde thème
+    themeSwitches.forEach(sw => { sw.checked = darkMode; });
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   });
 });
-
-//applique le thème sauvegardé
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
     document.body.classList.add('dark');
     document.body.style.fontFamily = "'Inter', sans-serif";
-    themeSwitches.forEach(sw => {
-      sw.checked = true;
-    });
+    themeSwitches.forEach(sw => { sw.checked = true; });
+  } else {
+    document.body.classList.remove('dark');
+    document.body.style.fontFamily = "'Fira Mono', 'Roboto Mono', 'Courier New', monospace";
+    themeSwitches.forEach(sw => { sw.checked = false; });
   }
 });
 
-//menu
+// Menu mobile (affichage/masque des liens)
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.getElementById('navLinks');
-if (menuToggle) {
-
+if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
-
 }
-//aide
+
+// Bouton aide
 const helpBtn = document.getElementById('helpBtn');
 if (helpBtn) {
   const helpPopup = document.querySelector('.help-popup');
@@ -57,14 +45,13 @@ if (helpBtn) {
   });
 }
 
+// Formulaire Connexion
 const loginForm = document.getElementById('loginForm');
-
 if (loginForm) {
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
-
     if (!email || !password) {
       alert('Veuillez remplir tous les champs.');
       return;
@@ -76,7 +63,7 @@ if (loginForm) {
         body: JSON.stringify({ email, password })
       })
       .then(async res => {
-        const data = await res.json();
+      const data = await res.json();
         document.getElementById("h2").innerHTML = data
         console.log(data)
         if (!data.token) {
@@ -84,7 +71,7 @@ if (loginForm) {
         }
         localStorage.setItem('token', data.token);
 
-        window.location.href = "http://localhost:5000/oui.html"
+        window.location.href = "http://localhost:5000/dashboard.html"
 
         
       })
@@ -101,21 +88,24 @@ const registerForm = document.getElementById('registerForm');
 if (registerForm) {
   registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const firstname = document.getElementById('regFirstname').value.trim();
-    const name = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const password = document.getElementById('regPassword').value.trim();
-    const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
-
-    if (!firstname || !name || !email || !password || !confirmPassword) {
+    const email = document.getElementById('email')?.value.trim();
+    const lastName = document.getElementById('lastName')?.value.trim();
+    const firstName = document.getElementById('firstName')?.value.trim();
+    const password = document.getElementById('password')?.value.trim();
+    const confirmPassword = document.getElementById('confirmPassword')?.value.trim();
+    if (!email || !lastName || !firstName || !password || !confirmPassword) {
       alert('Veuillez remplir tous les champs.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert('Les mots de passe ne correspondent pas.');
       return;
     }
     try {
       const res = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, name, firstname })
+        body: JSON.stringify({ email, password, name: lastName, firstname: firstName })
       });
       const data = await res.json();
       document.getElementById("h2").innerHTML = data;
@@ -126,6 +116,7 @@ if (registerForm) {
   });
 }
 
+// Formulaire reset
 const resetForm = document.getElementById('resetForm');
 if (resetForm) {
   resetForm.addEventListener('submit', (e) => {
@@ -139,6 +130,7 @@ if (resetForm) {
   });
 }
 
+// Redirection inscription
 const signupBtn = document.getElementById('signupBtn');
 if (signupBtn) {
   signupBtn.addEventListener('click', () => {

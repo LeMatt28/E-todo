@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - NoteFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">NoteFlow</a></h1>
+    <button class="menu-toggle" aria-label="Ouvrir le menu">☰</button>
+    <nav id="navLinks">
+      <button id="kanbanBtn" class="style-btn"><span class="icon">📋</span>Kanban</button>
+      <button id="timelineBtn" class="style-btn"><span class="icon">🕒</span>Chronologie</button>
+      <button id="styleBtn" class="style-btn"><span class="icon">🎨</span>Style</button>
+      <div class="switch">
+        <input type="checkbox" id="themeToggle">
+        <label for="themeToggle" class="slider"></label>
+      </div>
+    </nav>
+  </header>
+
+  <main id="dashboard">
+    <section id="kanbanView">
+      <div class="kanban-board">
+        <div class="kanban-column" data-status="todo">
+          <h2>À faire</h2>
+          <div class="kanban-tasks" id="todo"></div>
+          <button class="add-task-btn" onclick="openTaskModal('todo')">
+            <span class="icon">＋</span>Ajouter
+          </button>
+        </div>
+        <div class="kanban-column" data-status="doing">
+          <h2>En cours</h2>
+          <div class="kanban-tasks" id="doing"></div>
+          <button class="add-task-btn" onclick="openTaskModal('doing')">
+            <span class="icon">＋</span>Ajouter
+          </button>
+        </div>
+        <div class="kanban-column" data-status="done">
+          <h2>Terminé</h2>
+          <div class="kanban-tasks" id="done"></div>
+          <button class="add-task-btn" onclick="openTaskModal('done')">
+            <span class="icon">＋</span>Ajouter
+          </button>
+        </div>
+      </div>
+    </section>
+    <section id="timelineView" style="display:none;">
+      <div class="timeline-board" id="timeline"></div>
+    </section>
+  </main>
+  <div id="taskModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2 id="modalTitle">Nouvelle tâche</h2>
+      <input type="text" id="taskTitle" placeholder="Titre">
+      <input type="date" id="taskDue_time" placeholder="Due time">
+      <textarea id="taskDesc" placeholder="Description"></textarea>
+      <input type="color" id="taskColor" value="#274ae6">
+      <button class="style-btn" onclick="saveTask()">Enregistrer</button>
+      <button class="style-btn" onclick="closeTaskModal()">Fermer</button>
+    </div>
+  </div>
+  <div id="styleModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2>Personnaliser le style</h2>
+      <label>Couleur principale :
+        <input type="color" id="mainColorInput" value="#274ae6">
+      </label>
+      <label>Police :
+        <select id="fontSelect">
+          <option value="'Fira Mono', 'Roboto Mono', 'Courier New', monospace">Bloc Note</option>
+          <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
+          <option value="'Inter', sans-serif">Inter</option>
+          <option value="Arial, sans-serif">Arial</option>
+        </select>
+      </label>
+      <button class="style-btn" onclick="applyStyle()">Appliquer</button>
+      <button class="style-btn" onclick="closeStyleModal()">Fermer</button>
+    </div>
+  </div>
+  <button id="helpBtn">?</button>
+  <div class="help-popup">Besoin d'aide ? Voici comment fonctionne le dashboard... (info, support, etc.)</div>
+  <footer>…</footer>
+  <!-- <script src="dashboard.js"></script> -->
+</body>
+</html>
+<script src="scripts/dashboard.js"></script>
+</html>

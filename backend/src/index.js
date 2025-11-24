@@ -35,9 +35,9 @@ res.sendFile("index.html", {root: __dirname + "/../../frontend"});
     
 })
 
-app.get("/oui.html", token ,(req,res) =>{
+app.get("/dashboard", token ,(req,res) =>{
     console.log("Test")
-    res.sendFile("oui.html", {root: __dirname + "/../../frontend"});
+    res.sendFile("dashboard.html", {root: __dirname + "/../../frontend"});
     
 })
 
