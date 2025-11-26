@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:latest
 
 WORKDIR /usr/src/app
 
@@ -8,8 +8,10 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 4000
+EXPOSE 5000
+
+
+
 
 CMD [ "node", "src/index.js" ]
-
 

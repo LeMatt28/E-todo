@@ -1,59 +1,51 @@
 services:
-  # ----------------------------------------------------------------------- SQL -----------------------------------------------------------------------
-  mysql_db:
-    image: mysql
+
+  database:
+    image: mysql:latest
+    container_name: mysql
     restart: always
     ports:
-      - 3306:3306
-      
+      - "3306:3306"
+    env_file:
+      - ./backend/.env
     volumes:
       - ./e-todo.sql:/docker-entrypoint-initdb.d/e-todo.sql
-
     networks:
       - back
 
   phpmyadmin:
     image: phpmyadmin
-    container_name: phpmyadmin
     restart: always
     ports:
-      - 8080:80
+      - "8080:80"
     environment:
-      - PMA_HOST=mysql_db
-
-    depends_on:
-      - mysql_db
-
+      PMA_HOST: database
+      PMA_PORT: 3306
     networks:
       - back
-
-  # ----------------------------------------------------------------------- SQL -----------------------------------------------------------------------
-
-  # ----------------------------------------------------------------------- BACK -----------------------------------------------------------------------
+    depends_on:
+      - database
 
   backend:
     build: ./backend
     container_name: backend_etodo
+    env_file:
+      - ./backend/.env
     ports:
-      - "4000:4000"
-
+      - "5000:5000"
+    depends_on:
+      - database
+      
     networks:
       - back
 
-    depends_on:
-      - mysql_db
-  # ----------------------------------------------------------------------- BACK -----------------------------------------------------------------------
-
-  # ----------------------------------------------------------------------- FRONT -----------------------------------------------------------------------
   frontend:
     build: ./frontend
     container_name: frontend_etodo
     ports:
-      - "3000:3000"
-
-    depends_on:
-      - backend
-# ----------------------------------------------------------------------- FRONT -----------------------------------------------------------------------
+      - "3000:80"
+    networks:
+      - back
 
 networks:
   back:
