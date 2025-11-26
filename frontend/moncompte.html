@@ -11,10 +11,9 @@
   <h1><a href="index.html">NoteFlow</a></h1>
   <button class="menu-toggle">☰</button>
   <nav id="navLinks">
-    <!-- Liens “après connexion” -->
-    <a href="dashboard.html" class="btn">Dashboard</a>
-    <a href="moncompte.html" class="btn">Mon compte</a>
-    <button id="logoutBtn" class="btn">Se déconnecter</button>
+    <a href="dashboard.html" class="btn nav-link">Dashboard</a>
+    <a href="moncompte.html" class="btn nav-link active">Mon compte</a>
+    <button id="logoutBtn" class="btn nav-link">Se déconnecter</button>
 
     <div class="switch">
       <input type="checkbox" id="themeSwitch">
@@ -85,75 +84,7 @@
   </div>
 </footer>
 
+<!-- Script global existant (thème, menu mobile, help, etc.) -->
 <script src="script.js"></script>
-<script>
-// FRONTEND UNIQUEMENT :
-// - on simule le chargement/sauvegarde des infos dans localStorage
-// - ton équipe backend remplacera cette partie par de vrais appels API
-
-// Clé utilisée pour stocker les infos du profil côté navigateur
-const PROFILE_KEY = 'noteflow_profile';
-
-// Récup des éléments du formulaire
-const accountForm = document.getElementById('accountForm');
-const accFirstName = document.getElementById('accFirstName');
-const accLastName = document.getElementById('accLastName');
-const accEmail = document.getElementById('accEmail');
-const accPassword = document.getElementById('accPassword');
-const accPasswordConfirm = document.getElementById('accPasswordConfirm');
-
-// Charger les infos depuis localStorage au chargement
-window.addEventListener('DOMContentLoaded', () => {
-  try {
-    const stored = localStorage.getItem(PROFILE_KEY);
-    if (stored) {
-      const user = JSON.parse(stored);
-      accFirstName.value = user.firstname || '';
-      accLastName.value = user.lastname || user.name || '';
-      accEmail.value = user.email || '';
-    }
-  } catch (err) {
-    console.error('Erreur de lecture du profil (localStorage)', err);
-  }
-});
-
-// Soumission du formulaire (frontend only)
-if (accountForm) {
-  accountForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    if (accPassword.value && accPassword.value !== accPasswordConfirm.value) {
-      alert("Les mots de passe ne correspondent pas.");
-      return;
-    }
-
-    const user = {
-      firstname: accFirstName.value.trim(),
-      lastname: accLastName.value.trim(),
-      email: accEmail.value.trim(),
-      // on stocke éventuellement le mot de passe juste pour la démo frontend
-      password: accPassword.value ? accPassword.value.trim() : undefined
-    };
-
-    try {
-      localStorage.setItem(PROFILE_KEY, JSON.stringify(user));
-      alert("Profil mis à jour (stocké en local, côté navigateur).");
-    } catch (err) {
-      console.error('Erreur de sauvegarde du profil (localStorage)', err);
-      alert("Impossible de sauvegarder le profil en local.");
-    }
-  });
-}
-
-// Bouton déconnexion (frontend only : on supprime juste un éventuel token)
-const logoutBtn = document.getElementById('logoutBtn');
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('token');      // si tu l’utilises pour la connexion
-    // tu peux aussi décider de ne PAS supprimer PROFILE_KEY ici
-    window.location.href = 'index.html';
-  });
-}
-</script>
 </body>
 </html>
