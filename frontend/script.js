@@ -50,8 +50,8 @@ const loginForm = document.getElementById('loginForm');
 if (loginForm) {
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
+    const email = document.getElementById('LogEmail').value.trim();
+    const password = document.getElementById('LogPassword').value.trim();
     if (!email || !password) {
       alert('Veuillez remplir tous les champs.');
       return;
@@ -89,8 +89,8 @@ if (registerForm) {
   registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('email')?.value.trim();
-    const lastName = document.getElementById('lastName')?.value.trim();
-    const firstName = document.getElementById('firstName')?.value.trim();
+    const lastName = document.getElementById('lastname')?.value.trim();
+    const firstName = document.getElementById('firstname')?.value.trim();
     const password = document.getElementById('password')?.value.trim();
     const confirmPassword = document.getElementById('confirmPassword')?.value.trim();
     if (!email || !lastName || !firstName || !password || !confirmPassword) {

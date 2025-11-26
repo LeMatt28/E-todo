@@ -8,7 +8,6 @@ window.onload = () => {
 })
     .then(res => res.json())
     .then(data => {
-        // tasks.push(data);
         tasks = data.result || [];
         renderAll();
 
@@ -16,11 +15,18 @@ window.onload = () => {
 }
 
 
+
 // Data model
 let tasks = [];
 let editedTaskId = null;
 let currentStatus = 'todo';
 let currentView = 'kanban';
+
+
+function formatDate(dateString){
+  let date = new Date(dateString);
+   return date.toLocaleDateString("fr-FR")
+}
 
 // ------ Render Kanban
 function renderKanban() {
@@ -32,9 +38,9 @@ function renderKanban() {
       el.className = 'kanban-task';
       el.style.setProperty('--task-bg', task.color);
       el.innerHTML = `
-        <strong>${task.title}</strong> 
-        <div>${task.description}</div>
-        <div>${task.due_time}</div>
+        <strong>Titre : ${task.title}</strong>
+        <div>${task.description ? `Description : ${task.description}` : ''}</div>
+        <div>Date limite : ${formatDate(task.due_time)}</div>
         <div class="actions">
           <button onclick="editTask(${task.id})" aria-label="Modifier">✏️</button>
           <button onclick="deleteTask(${task.id})" aria-label="Supprimer">🗑</button>
@@ -101,9 +107,12 @@ function saveTask(){
   let title = document.getElementById('taskTitle').value.trim();
   let description = document.getElementById('taskDesc').value.trim();
   let due_time = document.getElementById('taskDue_time').value.trim();
-//   let status = document.getElementById('')
   let color = document.getElementById('taskColor').value;
   if(!title) return showToast("Titre obligatoire !", false);
+  // if(!description) return showToast("Description obligatoire !", false);
+  // if(!due_time) return showToast("Date limite obligatoire !", false);
+
+
   if(editedTaskId){
     fetch(`http://localhost:5000/todos/${editedTaskId}`, {
         method: "PUT",
@@ -131,8 +140,6 @@ function saveTask(){
         renderAll();
 
     })
-  closeTaskModal();
-  
   } else {
     fetch("http://localhost:5000/todos", {
         method: "POST",
@@ -170,17 +177,54 @@ function deleteTask(id){
     .then(data => {
         tasks = tasks.filter(t=>t.id!==id);
         showToast("Tâche supprimée !");
-        renderAll()
-  closeTaskModal();
+        renderAll();
+        closeTaskModal();
+
 })
 }
 
-function moveTask(id, newStatus){
-  let t = tasks.find(t=>t.id===id);
-  t.status = newStatus;
-  showToast("Tâche déplacée !");
-  renderAll();
+function cleanDateForMySQL(dateString) {
+    if (!dateString) return null;
+
+    // Si format ISO avec millisecondes + Z (comme ton cas)
+    if (dateString.includes("Z")) {
+        let clean = dateString.split(".")[0];
+        clean = clean.replace("T", " ");
+        return clean;
+    }
 }
+
+
+
+function moveTask(id, newStatus){
+
+    let t = tasks.find(t=>t.id===id);
+
+    fetch(`http://localhost:5000/todos/${id}`, {
+        method: "PUT",
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: t.title,
+            description: t.description,
+            due_time: cleanDateForMySQL(t.due_time),
+            status: newStatus
+
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        showToast("Tâche déplacée !");
+        t.status = newStatus;
+        renderAll();
+
+}) 
+
+}
+
+
 function renderAll(){
   renderKanban();
   renderTimeline();
@@ -203,7 +247,7 @@ function applyStyle(){
   let color=document.getElementById('mainColorInput').value;
   document.querySelectorAll('.kanban-task,.timeline-item,.add-task-btn,.kanban-column h2').forEach(el=>{
     el.style.setProperty('--task-bg',color);
-    el.style.color='#fff';
+    el.style.color='#ffffffff';
   });
   document.body.style.setProperty('--main-color',color);
   document.body.style.fontFamily = document.getElementById('fontSelect').value;

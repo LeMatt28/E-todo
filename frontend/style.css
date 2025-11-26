@@ -225,12 +225,12 @@ body.dark .kanban-column[data-status="todo"] .kanban-task {
   border-color: #3c4cbc;
   color: #b1c4ff;
 }
-.kanban-column[data-status="doing"] .kanban-task {
+.kanban-column[data-status="in progress"] .kanban-task {
   background: #fff2e5;
   border-color: #ffd8b0;
   color: #a65702;
 }
-body.dark .kanban-column[data-status="doing"] .kanban-task {
+body.dark .kanban-column[data-status="in progress"] .kanban-task {
   background: #302620;
   border-color: #ffad58;
   color: #ffc176;
