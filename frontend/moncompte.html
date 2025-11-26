@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteFlow - Mon compte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1><a href="index.html">NoteFlow</a></h1>
+  <button class="menu-toggle">☰</button>
+  <nav id="navLinks">
+    <!-- Liens “après connexion” -->
+    <a href="dashboard.html" class="btn">Dashboard</a>
+    <a href="moncompte.html" class="btn">Mon compte</a>
+    <button id="logoutBtn" class="btn">Se déconnecter</button>
+
+    <div class="switch">
+      <input type="checkbox" id="themeSwitch">
+      <label for="themeSwitch" class="slider"></label>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <form class="form-card" id="accountForm">
+    <h2 id="h2">Mon compte</h2>
+
+    <input
+      type="text"
+      id="accFirstName"
+      name="firstname"
+      placeholder="Prénom"
+      required
+    >
+    <input
+      type="text"
+      id="accLastName"
+      name="lastname"
+      placeholder="Nom"
+      required
+    >
+    <input
+      type="email"
+      id="accEmail"
+      name="email"
+      placeholder="Email"
+      required
+    >
+
+    <input
+      type="password"
+      id="accPassword"
+      name="password"
+      placeholder="Nouveau mot de passe (optionnel)"
+    >
+    <input
+      type="password"
+      id="accPasswordConfirm"
+      name="confirmPassword"
+      placeholder="Confirmer le mot de passe"
+    >
+
+    <button type="submit" class="btn">Mettre à jour</button>
+  </form>
+</main>
+
+<button id="helpBtn">?</button>
+<div class="help-popup">Besoin d'aide ? Contactez support@noteflow.com</div>
+
+<footer>
+  <div>
+    <span>© 2025 NoteFlow &ndash; Tous droits réservés</span>
+    &middot;
+    <a href="mentions.html" class="footer-link">Mentions légales</a>
+    &middot;
+    <a href="about.html" class="footer-link">À propos du site</a>
+  </div>
+  <div class="footer-links">
+    <button class="social-btn" onclick="window.open('https://www.linkedin.com/in/membre1/', '_blank')">LinkedIn Membre 1</button>
+    <button class="social-btn" onclick="window.open('https://www.linkedin.com/in/membre2/', '_blank')">LinkedIn Membre 2</button>
+    <button class="social-btn" onclick="window.open('https://github.com/membre3', '_blank')">GitHub Membre 3</button>
+    <button class="social-btn" onclick="window.open('https://github.com/membre4', '_blank')">GitHub Membre 4</button>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// FRONTEND UNIQUEMENT :
+// - on simule le chargement/sauvegarde des infos dans localStorage
+// - ton équipe backend remplacera cette partie par de vrais appels API
+
+// Clé utilisée pour stocker les infos du profil côté navigateur
+const PROFILE_KEY = 'noteflow_profile';
+
+// Récup des éléments du formulaire
+const accountForm = document.getElementById('accountForm');
+const accFirstName = document.getElementById('accFirstName');
+const accLastName = document.getElementById('accLastName');
+const accEmail = document.getElementById('accEmail');
+const accPassword = document.getElementById('accPassword');
+const accPasswordConfirm = document.getElementById('accPasswordConfirm');
+
+// Charger les infos depuis localStorage au chargement
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const stored = localStorage.getItem(PROFILE_KEY);
+    if (stored) {
+      const user = JSON.parse(stored);
+      accFirstName.value = user.firstname || '';
+      accLastName.value = user.lastname || user.name || '';
+      accEmail.value = user.email || '';
+    }
+  } catch (err) {
+    console.error('Erreur de lecture du profil (localStorage)', err);
+  }
+});
+
+// Soumission du formulaire (frontend only)
+if (accountForm) {
+  accountForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (accPassword.value && accPassword.value !== accPasswordConfirm.value) {
+      alert("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    const user = {
+      firstname: accFirstName.value.trim(),
+      lastname: accLastName.value.trim(),
+      email: accEmail.value.trim(),
+      // on stocke éventuellement le mot de passe juste pour la démo frontend
+      password: accPassword.value ? accPassword.value.trim() : undefined
+    };
+
+    try {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(user));
+      alert("Profil mis à jour (stocké en local, côté navigateur).");
+    } catch (err) {
+      console.error('Erreur de sauvegarde du profil (localStorage)', err);
+      alert("Impossible de sauvegarder le profil en local.");
+    }
+  });
+}
+
+// Bouton déconnexion (frontend only : on supprime juste un éventuel token)
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('token');      // si tu l’utilises pour la connexion
+    // tu peux aussi décider de ne PAS supprimer PROFILE_KEY ici
+    window.location.href = 'index.html';
+  });
+}
+</script>
+</body>
+</html>
