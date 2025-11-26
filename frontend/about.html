@@ -3,32 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NoteFlow - Connexion</title>
+  <title>À propos de NoteFlow</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1><a href="index.html">NoteFlow</a></h1>
-  <button class="menu-toggle">☰</button>
-  <nav id="navLinks">
-    <a href="register.html" class="btn">Créer un compte</a>
-    <div class="switch">
-      <input type="checkbox" id="themeSwitch">
-      <label for="themeSwitch" class="slider"></label>
-    </div>
-  </nav>
-</header>
-<main>
-  <form action="http://localhost:5000/login" class="form-card" id="loginForm" method="POST">
-    <h2 id="h2">Connexion</h2>
-    <input type="email" name="email" id="LogEmail" placeholder="Email" required>
-    <input type="password" name="password" id="LogPassword" placeholder="Mot de passe" required>
-    <button type="submit" class="btn">Se connecter</button>
-  </form>
-</main>
-<button id="helpBtn">?</button>
-<div class="help-popup">Besoin d'aide ? Contactez support@noteflow.com</div>
-<footer>
+  <header>
+    <h1><a href="index.html">NoteFlow</a></h1>
+  </header>
+  <main>
+    <section class="form-card">
+      <h2>À propos de NoteFlow</h2>
+      <p>
+        NoteFlow est un espace bloc-note collaboratif pensé pour la gestion de tâches et projets d’équipe, dans un esprit minimaliste et efficace.<br>
+        Notre équipe (Membre 1, Membre 2, Membre 3, Membre 4) a conçu ce service pour favoriser la productivité, la clarté et la simplicité.<br>
+        Toutes les données sont synchronisées et sécurisées (voir mentions légales).
+      </p>
+    </section>
+  </main><footer>
   <div>
     <span>© 2025 NoteFlow &ndash; Tous droits réservés</span>
     &middot;
@@ -43,6 +34,5 @@
     <button class="social-btn" onclick="window.open('https://github.com/membre4', '_blank')">GitHub Membre 4</button>
   </div>
 </footer>
-<script src="script.js"></script>
 </body>
 </html>
