@@ -14,6 +14,7 @@ themeSwitches.forEach(themeSwitch => {
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   });
 });
+
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
@@ -27,6 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
 // Menu mobile (affichage/masque des liens)
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.getElementById('navLinks');
@@ -36,6 +38,7 @@ if (menuToggle && navLinks) {
   });
 }
 
+
 // Bouton aide
 const helpBtn = document.getElementById('helpBtn');
 if (helpBtn) {
@@ -44,6 +47,7 @@ if (helpBtn) {
     helpPopup.classList.toggle('show');
   });
 }
+
 
 // Formulaire Connexion
 const loginForm = document.getElementById('loginForm');
@@ -57,33 +61,32 @@ if (loginForm) {
       return;
     }
    
-       fetch("http://localhost:5000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      })
-      .then(async res => {
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    })
+    .then(async res => {
       const data = await res.json();
-        document.getElementById("h2").innerHTML = data
-        console.log(data)
-        if (!data.token) {
-          return console.error("Token JWT manquant")
-        }
-        localStorage.setItem('token', data.token);
-
-        window.location.href = "http://localhost:5000/dashboard.html"
-
-        
-      })
-      .catch(err => {
-        if (err) {
-          console.error(err)
-          alert("Erreur d'authentification")
-        }
-      })
+      document.getElementById("h2").innerHTML = data;
+      console.log(data);
+      if (!data.token) {
+        return console.error("Token JWT manquant");
+      }
+      localStorage.setItem('token', data.token);
+      window.location.href = "http://localhost:5000/dashboard.html";
+    })
+    .catch(err => {
+      if (err) {
+        console.error(err);
+        alert("Erreur d'authentification");
+      }
+    });
   });
 }
 
+
+// Formulaire Inscription
 const registerForm = document.getElementById('registerForm');
 if (registerForm) {
   registerForm.addEventListener('submit', async (e) => {
@@ -93,6 +96,7 @@ if (registerForm) {
     const firstName = document.getElementById('firstname')?.value.trim();
     const password = document.getElementById('password')?.value.trim();
     const confirmPassword = document.getElementById('confirmPassword')?.value.trim();
+
     if (!email || !lastName || !firstName || !password || !confirmPassword) {
       alert('Veuillez remplir tous les champs.');
       return;
@@ -101,6 +105,7 @@ if (registerForm) {
       alert('Les mots de passe ne correspondent pas.');
       return;
     }
+
     try {
       const res = await fetch("http://localhost:5000/register", {
         method: "POST",
@@ -110,11 +115,11 @@ if (registerForm) {
       const data = await res.json();
       document.getElementById("h2").innerHTML = data;
     } catch (error) {
-      // console.error(error);
       alert("Une erreur est survenue lors de la création du compte.");
     }
   });
 }
+
 
 // Formulaire reset
 const resetForm = document.getElementById('resetForm');
@@ -130,10 +135,35 @@ if (resetForm) {
   });
 }
 
-// Redirection inscription
+
+// Redirection inscription (si bouton dédié)
 const signupBtn = document.getElementById('signupBtn');
 if (signupBtn) {
   signupBtn.addEventListener('click', () => {
     window.location.href = 'register.html';
+  });
+}
+
+
+// Déconnexion via lien <a id="logoutLink">
+const logoutLink = document.getElementById('logoutLink');
+if (logoutLink) {
+  logoutLink.addEventListener('click', async (e) => {
+    e.preventDefault();
+    try {
+      // appel backend si tu as un endpoint /logout (facultatif)
+      await fetch("http://localhost:5000/logout", {
+        method: "POST",
+        credentials: "include"
+      }).catch(() => { /* au cas où l'API n'existe pas encore */ });
+
+      // suppression du token côté front
+      localStorage.removeItem('token');
+      // redirection vers la page de connexion / accueil
+      window.location.href = 'index.html';
+    } catch (err) {
+      console.error(err);
+      alert("Erreur lors de la déconnexion.");
+    }
   });
 }
