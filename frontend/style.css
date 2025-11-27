@@ -31,7 +31,7 @@ header {
   justify-content: space-between;
   background: transparent;
   padding: 16px 28px;
-  border-bottom: 1.7px solid #e8e7e2;
+  border-bottom: 1.7px dashed #3d3aed;
   min-height: 48px;
 }
 body.dark header {
@@ -40,7 +40,7 @@ body.dark header {
 header h1 a {
   color: #3d3aed;
   font-family: inherit;
-  font-size: 22px;
+  font-size: 28px;
   text-decoration: none;
   padding: 4px 0;
   transition: color 0.18s;
@@ -106,7 +106,7 @@ main {
   border-radius: 12px;
   border: 1.3px dashed #eceaea;
   padding: 40px;
-  box-shadow: 0 5px 18px rgba(96,96,128,0.07);
+  box-shadow: 0px 0px 60px 5px rgba(0,0,0,0.59);
   width: 100%;
   max-width: 380px;
   display: flex;
@@ -312,6 +312,7 @@ body.dark .kanban-task button:hover, body.dark .timeline-item button:hover {
 
 /* ===== BOUTONS DASHBOARD (Ajouter, Style) ===== */
 .add-task-btn, .style-btn {
+  text-decoration: none;
   padding: 10px 21px;
   background: linear-gradient(90deg, #fcfbf6 85%, #e6e7fd 100%);
   color: #393ae1;
@@ -432,6 +433,72 @@ body.dark .footer-links .social-btn {
   border: 1px dashed #53547d;
 }
 body.dark .footer-links .social-btn:hover {
+  background: #181320;
+  color: #b2b1f8;
+  border-color: #817edb;
+}
+
+#logoutBtn {
+  text-decoration: none;
+  border: 1px dashed #aca8c7;
+  background: transparent;
+  color: #3d3aed;
+  border-radius: 9px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.13s, color 0.13s, border 0.13s, transform 0.12s;
+}
+
+#logoutBtn:hover {
+  background: #ebeafd;
+  color: #181853;
+  border-color: #7b79aa;
+  transform: scale(1.05);
+}
+
+body.dark #logoutBtn {
+  background: transparent;
+  color: #dedcff;
+  border: 1px dashed #53547d;
+}
+
+body.dark #logoutBtn:hover {
+  background: #181320;
+  color: #b2b1f8;
+  border-color: #817edb;
+}
+
+#REDBtn {
+  text-decoration: none;
+  border: 1px dashed #aca8c7;
+  background: transparent;
+  color: #3d3aed;
+  border-radius: 9px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.13s, color 0.13s, border 0.13s, transform 0.12s;
+}
+
+#REDBtn:hover {
+  background: #ebeafd;
+  color: #181853;
+  border-color: #7b79aa;
+  transform: scale(1.05);
+}
+
+body.dark #REDBtn {
+  background: transparent;
+  color: #dedcff;
+  border: 1px dashed #53547d;
+}
+
+body.dark #REDBtn:hover {
   background: #181320;
   color: #b2b1f8;
   border-color: #817edb;

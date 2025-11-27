@@ -11,8 +11,7 @@
   <h1><a href="index.html">NoteFlow</a></h1>
   <button class="menu-toggle">☰</button>
   <nav id="navLinks">
-    <a href="dashboard.html" class="btn nav-link">Dashboard</a>
-    <a href="moncompte.html" class="btn nav-link active">Mon compte</a>
+    <a href="dashboard.html" id="dashboardBtn" >Dashboard</a>
     <button id="logoutBtn" class="btn nav-link">Se déconnecter</button>
 
     <div class="switch">
@@ -23,7 +22,7 @@
 </header>
 
 <main>
-  <form class="form-card" id="accountForm">
+  <form  action="http://localhost:5000/user" class="form-card" id="accountForm" method="POST">
     <h2 id="h2">Mon compte</h2>
 
     <input
@@ -85,6 +84,6 @@
 </footer>
 
 <!-- Script global existant (thème, menu mobile, help, etc.) -->
-<script src="script.js"></script>
+<script src="./scripts/account.js"></script>
 </body>
 </html>

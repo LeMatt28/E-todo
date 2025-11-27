@@ -7,16 +7,24 @@ const token = require("../../middleware/VerifToken")
 
 
 
-const { deleteuser, updateuser, getuserinfosid, getuserinfosemail} = require("./user.query");
+const { deleteuser, updateuser, getuserinfosid, getuserinfosemail, updateuserPass} = require("./user.query");
 const { gettodobyuserid } = require("../todos/todo.query");
 
 // MODIFIER UN UTILISATEUR
 rooter.put("/users/:id", token, async (req, res) => {
     try {
-        const id = req.headers.id
-        const { email, password, name, firstname } = req.body;
+        const id = req.params.id
+        const { email, name, password, firstname } = req.body;
+        if(!password){
+            console.log("pas pass")
+            await updateuser(id , email, name, firstname);
+        } else {
 
-        const result = await updateuser(id , email, password, name, firstname);
+            const salt = await bcrypt.genSalt(10);
+            const hash = await bcrypt.hash(password, salt);
+            await updateuserPass(id , email, hash, name, firstname);
+            console.log("pass")
+        }
         res.status(200).json({ message: "Utilisateur modifié avec succès !" });
     } catch(err) {
         res.status(500).json(err);

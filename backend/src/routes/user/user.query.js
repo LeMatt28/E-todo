@@ -12,7 +12,17 @@ async function deleteuser(id){
 }
 
 // SQL MODIFIER USER
-async function updateuser(id , email, password, name, firstname){
+async function updateuser(id , email, name, firstname){
+    try {
+        const [result] = await connexion.execute("UPDATE user SET email = ?, name = ?, firstname = ? WHERE id = ?", [email, name, firstname, id]);
+        return result;
+    } catch(err){
+        throw err;
+    }
+}
+
+// SQL MODIFIER USER
+async function updateuserPass(id , email, password, name, firstname){
     try {
         const [result] = await connexion.execute("UPDATE user SET email = ?, password = ?, name = ?, firstname = ? WHERE id = ?", [email, password, name, firstname, id]);
         return result;
@@ -54,7 +64,7 @@ async function getuserinfosemail(email){
 // SQL RECUPERER LES INFOS DU USER ID
 async function getuserinfosid(id){
     try {
-        const [result] = await connexion.execute("SELECT id, email, password, created_at, name, firstname FROM user WHERE id = ?", [id]);
+        const [result] = await connexion.execute("SELECT id, email, name, firstname FROM user WHERE id = ?", [id]);
         return result;
     } catch(err){
         throw err;
@@ -69,5 +79,6 @@ module.exports = {
     createuser,
     getusers,
     getuserinfosid,
-    getuserinfosemail
+    getuserinfosemail,
+    updateuserPass
 }
