@@ -27,22 +27,22 @@ app.get("/", (req,res) =>{
     res.send("weeeeesh")
 })
 
-app.use(express.static(__dirname + "/../../frontend"));
+app.use(express.static(__dirname + "/frontend"));
 
 
 app.get("/login", (req,res) =>{
-res.sendFile("index.html", {root: __dirname + "/../../frontend"});
+res.sendFile("index.html", {root: __dirname + "/frontend"});
     
 })
 
 app.get("/dashboard", token ,(req,res) =>{
     console.log("Test")
-    res.sendFile("dashboard.html", {root: __dirname + "/../../frontend"});
+    res.sendFile("dashboard.html", {root: __dirname + "/frontend"});
     
 })
 
 app.get("/register", (req,res) =>{
-    res.sendFile("register.html", {root: __dirname + "/../../frontend"});
+    res.sendFile("register.html", {root: __dirname + "/frontend"});
     
 })
 

@@ -54,7 +54,12 @@ function renderKanban() {
     col.ondragover = (e)=>{ e.preventDefault(); };
     col.ondrop = (e)=>{
       let data = JSON.parse(e.dataTransfer.getData("text/plain"));
-      moveTask(data.id, status);
+      try {
+        moveTask(data.id, status);
+
+      } catch (err) {
+        console.log(err)
+      }
     };
   });
 }
@@ -184,6 +189,7 @@ function deleteTask(id){
 }
 
 function cleanDateForMySQL(dateString) {
+  console.log(dateString)
     if (!dateString) return null;
 
     // Si format ISO avec millisecondes + Z (comme ton cas)
@@ -192,14 +198,13 @@ function cleanDateForMySQL(dateString) {
         clean = clean.replace("T", " ");
         return clean;
     }
+    return dateString;
 }
 
 
 
 function moveTask(id, newStatus){
-
     let t = tasks.find(t=>t.id===id);
-
     fetch(`http://localhost:5000/todos/${id}`, {
         method: "PUT",
         headers: {

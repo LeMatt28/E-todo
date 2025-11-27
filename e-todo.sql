@@ -1,3 +1,8 @@
+CREATE USER IF NOT EXISTS 'etodo_user'@'%' IDENTIFIED BY 'MotDePasseEtodoUser';
+GRANT ALL PRIVILEGES ON etodo.* TO 'etodo_user'@'%';
+FLUSH PRIVILEGES;
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1deb3
 -- https://www.phpmyadmin.net/

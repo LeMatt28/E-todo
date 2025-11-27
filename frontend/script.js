@@ -71,7 +71,7 @@ if (loginForm) {
         }
         localStorage.setItem('token', data.token);
 
-        window.location.href = "http://localhost:5000/dashboard.html"
+        window.location.href = "http://localhost:3000/dashboard.html"
 
         
       })

@@ -1,41 +1,55 @@
 services:
-  # ----------------------------------------------------------------------- BACK -----------------------------------------------------------------------
-  mysql_db:
-    image: mysql
+  database:
+    image: mysql:latest
+    container_name: mysql
     restart: always
     ports:
-      - 3033:3033
-    environment:
-      MYSQL_DATABASE: etodo
-      MYSQL_ROOT_PASSWORD: TonMotDePasse
-      MYSQL_USER: root
-      MYSQL_PASSWORD: TonMotDePasse
-
+      - "3306:3306"
+    env_file:
+      - ./backend/.env
     volumes:
       - ./e-todo.sql:/docker-entrypoint-initdb.d/e-todo.sql
-
     networks:
       - back
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 2s
+      retries: 10
 
   phpmyadmin:
     image: phpmyadmin
     restart: always
     ports:
-      - 8080:80
+      - "8080:80"
     environment:
-      - PMA_ARBITRARY=1
+      PMA_HOST: database
+      PMA_PORT: 3306
+    networks:
+      - back
+    depends_on:
+      - database
 
+  backend:
+    build: ./backend
+    container_name: backend_etodo
+    env_file:
+      - ./backend/.env
+    ports:
+      - "5000:5000"
+    depends_on:
+      database:
+        condition: service_healthy
     networks:
       - back
 
-    depends_on:
-      - mysql_db
+  frontend:
+    build: ./frontend
+    container_name: frontend_etodo
+    ports:
+      - "3000:80"
+    networks:
+      - back
 
 networks:
   back:
     driver: bridge
-# ----------------------------------------------------------------------- BACK -----------------------------------------------------------------------
-
-# ----------------------------------------------------------------------- FRONT -----------------------------------------------------------------------
-# ----------------------------------------------------------------------- FRONT -----------------------------------------------------------------------
-
