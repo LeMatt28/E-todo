@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteFlow - Mon compte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1><a href="index.html">NoteFlow</a></h1>
+  <button class="menu-toggle">☰</button>
+  <nav id="navLinks">
+    <a href="dashboard.html" class="btn nav-link">Dashboard</a>
+    <a href="moncompte.html" class="btn nav-link active">Mon compte</a>
+    <button id="logoutBtn" class="btn nav-link">Se déconnecter</button>
+
+    <div class="switch">
+      <input type="checkbox" id="themeSwitch">
+      <label for="themeSwitch" class="slider"></label>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <form class="form-card" id="accountForm">
+    <h2 id="h2">Mon compte</h2>
+
+    <input
+      type="text"
+      id="accFirstName"
+      name="firstname"
+      placeholder="Prénom"
+      required
+    >
+    <input
+      type="text"
+      id="accLastName"
+      name="lastname"
+      placeholder="Nom"
+      required
+    >
+    <input
+      type="email"
+      id="accEmail"
+      name="email"
+      placeholder="Email"
+      required
+    >
+
+    <input
+      type="password"
+      id="accPassword"
+      name="password"
+      placeholder="Nouveau mot de passe (optionnel)"
+    >
+    <input
+      type="password"
+      id="accPasswordConfirm"
+      name="confirmPassword"
+      placeholder="Confirmer le mot de passe"
+    >
+
+    <button type="submit" class="btn">Mettre à jour</button>
+  </form>
+</main>
+
+<button id="helpBtn">?</button>
+<div class="help-popup">Besoin d'aide ? Contactez support@noteflow.com</div>
+
+<footer>
+  <div>
+    <span>© 2025 NoteFlow &ndash; Tous droits réservés</span>
+    &middot;
+    <a href="mentions.html" class="footer-link">Mentions légales</a>
+    &middot;
+    <a href="about.html" class="footer-link">À propos du site</a>
+  </div>
+  <div class="footer-links">
+    <button class="social-btn" onclick="window.open('https://www.linkedin.com/in/membre1/', '_blank')">LinkedIn Membre 1</button>
+    <button class="social-btn" onclick="window.open('https://www.linkedin.com/in/membre2/', '_blank')">LinkedIn Membre 2</button>
+    <button class="social-btn" onclick="window.open('https://github.com/membre3', '_blank')">GitHub Membre 3</button>
+    <button class="social-btn" onclick="window.open('https://github.com/membre4', '_blank')">GitHub Membre 4</button>
+  </div>
+</footer>
+
+<!-- Script global existant (thème, menu mobile, help, etc.) -->
+<script src="script.js"></script>
+</body>
+</html>
