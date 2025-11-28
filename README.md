@@ -2,7 +2,7 @@
 
 # DESCRIPTION:
 
-Application e-todo Full Stack permettant de créer et de gérer une liste de tâches créer et gérer une liste de tâches
+Application e-todo Full Stack permettant de créer et de gérer une liste de tâches.
 Le projet fonctionne sur un frontend en HTML / CSS / JS [ou REACT que nous avons testé (mais pas mis en place)], un backend avec NODE JS EXPRESS et une base de donnée SQL. Intégration d’un Docker compose et deux dockerfile pour l’héberger afin d’accélérer l’installation et le lancement.
 
 ## _Packages_
@@ -62,7 +62,7 @@ une fois cela fait trouvez les conteneurs concerner par le projet:
 
      docker container prune --force --filter "until=5m"
 
-Il permet en cas de besoin de supprimer les conteneurs créé il y a moins de 5 minutes (d'autres commandes sont disponible dans la documentation de docker !)
+Il permet en cas de besoin de supprimer les conteneurs créé il y a moins de 5 minutes (d'autres commandes sont disponible dans la [documentation de docker](https://docs.docker.com/) !)
 
 # INFORMATION SUPPLEMENTAIRE
 
