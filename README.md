@@ -68,39 +68,41 @@ Il permet en cas de besoin de supprimer les conteneurs créé il y a moins de 5 
 
 ## Arbre de projet
 
+```
 .
-├── README.md  
-├── ReadScreen  
-├── backend  
-│   ├── Dockerfile  
-│   ├── package-lock.json  
-│   ├── package.json  
-│   └── src  
-│   ├── config  
-│   │   └── db.js  
-│   ├── index.js  
-│   ├── middleware  
-│   │   └── VerifToken.js  
-│   └── routes  
-│   ├── auth  
-│   │   └── auth.js  
-│   ├── register  
-│   │   └── reg.js  
-│   ├── todos  
-│   │   ├── todo.js  
-│   │   └── todo.query.js  
-│   └── user  
-│   ├── user.query.js  
-│   └── users.js  
-├── docker-compose.yml  
-├── e-todo.sql  
-└── frontend  
- ├── Dockerfile  
- ├── index.html  
- ├── register.html  
- ├── reset.html  
- ├── script.js  
+├── README.md
+├── ReadScreen
+├── backend
+│   ├── Dockerfile
+│   ├── package-lock.json
+│   ├── package.json
+│   └── src
+│   ├── config
+│   │   └── db.js
+│   ├── index.js
+│   ├── middleware
+│   │   └── VerifToken.js
+│   └── routes
+│   ├── auth
+│   │   └── auth.js
+│   ├── register
+│   │   └── reg.js
+│   ├── todos
+│   │   ├── todo.js
+│   │   └── todo.query.js
+│   └── user
+│   ├── user.query.js
+│   └── users.js
+├── docker-compose.yml
+├── e-todo.sql
+└── frontend
+ ├── Dockerfile
+ ├── index.html
+ ├── register.html
+ ├── reset.html
+ ├── script.js
  └── style.css
+```
 
 ## Participant
 
