@@ -1,31 +1,25 @@
-// Thème (dark/light)
-const themeSwitches = document.querySelectorAll('#themeSwitch');
-themeSwitches.forEach(themeSwitch => {
-  themeSwitch.addEventListener('change', () => {
-    const darkMode = themeSwitch.checked;
-    if (darkMode) {
-      document.body.classList.add('dark');
-      document.body.style.fontFamily = "'Inter', sans-serif";
-    } else {
-      document.body.classList.remove('dark');
-      document.body.style.fontFamily = "'Fira Mono', 'Roboto Mono', 'Courier New', monospace";
-    }
-    themeSwitches.forEach(sw => { sw.checked = darkMode; });
-    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-  });
-});
+// MODE SOMBRE/CLAIR
+const themeToggle = document.getElementById('themeToggle');
+
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme');
+
   if (savedTheme === 'dark') {
     document.body.classList.add('dark');
-    document.body.style.fontFamily = "'Inter', sans-serif";
-    themeSwitches.forEach(sw => { sw.checked = true; });
+    themeToggle.textContent = "☀️";
   } else {
-    document.body.classList.remove('dark');
-    document.body.style.fontFamily = "'Fira Mono', 'Roboto Mono', 'Courier New', monospace";
-    themeSwitches.forEach(sw => { sw.checked = false; });
+    themeToggle.textContent = "🌙";
   }
 });
+
+themeToggle.addEventListener('click', () => {
+  const dark = document.body.classList.toggle('dark');
+
+  themeToggle.textContent = dark ? "☀️" : "🌙";
+
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+});
+
 
 // Menu mobile (affichage/masque des liens)
 const menuToggle = document.querySelector('.menu-toggle');
@@ -116,24 +110,3 @@ if (registerForm) {
   });
 }
 
-// Formulaire reset
-const resetForm = document.getElementById('resetForm');
-if (resetForm) {
-  resetForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('resetEmail').value.trim();
-    if (!email) {
-      alert('Veuillez entrer votre email.');
-      return;
-    }
-    alert(`Un email de réinitialisation a été envoyé à ${email} (simulation).`);
-  });
-}
-
-// Redirection inscription
-const signupBtn = document.getElementById('signupBtn');
-if (signupBtn) {
-  signupBtn.addEventListener('click', () => {
-    window.location.href = 'register.html';
-  });
-}

@@ -25,6 +25,40 @@ body.dark {
 }
 
 /* ========== HEADER ========== */
+
+.theme-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 9px;
+  border: 1.5px dashed #aca8c7;
+  background: transparent;
+  color: #3d3aed;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  box-shadow: 0 2px 6px rgba(96,96,128,0.10);
+}
+
+.theme-btn:hover {
+  background: #ebeafd;
+  transform: scale(1.07);
+}
+
+body.dark .theme-btn {
+  background: transparent;
+  border-color: #53547d;
+  color: #dedcff;
+  box-shadow: 0 3px 12px rgba(140,140,255,0.18);
+}
+
+body.dark .theme-btn:hover {
+  background: #23203c;
+}
+
+
 header {
   display: flex;
   align-items: center;
@@ -50,7 +84,7 @@ header h1 a:hover {
 }
 header nav {
   display: flex;
-  gap: 14px;
+  gap: 15px;
 }
 
 /* -------- MENU BUTTON ONLY MOBILE -------- */
@@ -185,10 +219,11 @@ form a:hover {
 
 .kanban-board {
   display: flex;
-  gap: 24px;
+  gap: 85px;
   justify-content: center;
   align-items: flex-start;
   margin-top: 38px;
+  padding: 4px 12px;
 }
 .kanban-column {
   background: transparent;
@@ -196,17 +231,19 @@ form a:hover {
   border: none;
   box-shadow: none;
   padding: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 500px;
 }
 
 /* Titres colonne dashboard */
 .kanban-column h2 {
-  font-size: 1.1em;
-  font-weight: 700;
+
+  font-size: 1.6em;
+  font-weight: 800;
   letter-spacing: 0.04em;
-  padding: 10px 0 15px 7px;
-  border-bottom: 1.3px dashed #e0e0f3;
-  margin-bottom: 6px;
+  padding: 0px 0 8px 7px;
+
+  border-bottom: 1.3px dashed #0000005d;
+  margin-bottom: 15px;
   color: #3d3aed;
 }
 body.dark .kanban-column h2 {
@@ -219,6 +256,7 @@ body.dark .kanban-column h2 {
   background: #edf0ff;
   border-color: #c0d5ff;
   color: #1a2a6b;
+  
 }
 body.dark .kanban-column[data-status="todo"] .kanban-task {
   background: #202a3c;
@@ -247,17 +285,43 @@ body.dark .kanban-column[data-status="done"] .kanban-task {
 }
 
 .kanban-task, .timeline-item {
-  border-radius: 11px;
-  border-width: 1.5px;
+  font-size: 1.3em;
+  padding: 18px 24px;
+  border-radius: 14px;
+
   font-family: inherit;
   font-size: 1em;
   padding: 13px 19px;
-  transition: box-shadow 0.21s, transform 0.17s, background 0.2s;
-  box-shadow: 0 1.5px 8px rgba(80,80,120,0.08);
+  transition: transform 0.17s, background 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   position: relative;
   margin-top: 9px;
   margin-bottom: 8px;
 }
+
+#taskTitle,
+#taskDesc,
+#taskDue_time {
+  padding: 12px;
+  margin: 10px;
+  width: 100%;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  background: #f8f8f8;
+  font-size: 15px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+#taskTitle:focus,
+#taskDesc:focus,
+#taskDue_time:focus {
+  border-color: #3d3aed;
+  box-shadow: 0 0 5px rgba(78,140,255,0.4);
+  outline: none;
+  background: white;
+}
+
+
 .kanban-task:hover, .timeline-item:hover {
   transform: scale(1.03) translateY(-3px);
   box-shadow: 0 7px 18px rgba(80,80,120,0.13);
@@ -323,7 +387,7 @@ body.dark .kanban-task button:hover, body.dark .timeline-item button:hover {
   font-weight: 700;
   letter-spacing: 0.05em;
   cursor: pointer;
-  box-shadow: 0 3px 15px rgba(61,58,237,0.10);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.59);
   transition: background 0.15s, color 0.15s, box-shadow 0.11s, transform 0.12s;
   position: relative;
   overflow: hidden;
@@ -381,7 +445,7 @@ body.dark .add-task-btn:active, body.dark .style-btn:active {
   color: #222;
   padding: 29px 38px;
   min-width: 320px;
-  max-width: 96vw;
+  max-width: 40vw;
 }
 body.dark .modal-content {
   background: #232332;
@@ -483,6 +547,8 @@ body.dark #logoutBtn:hover {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.13s, color 0.13s, border 0.13s, transform 0.12s;
+  text-align: center;      
+  display: inline-block
 }
 
 #REDBtn:hover {
@@ -584,11 +650,11 @@ body.dark .help-popup {
   }
   .form-card, form { padding: 8px;}
 }
-.switch { margin-left: 17px;}
+
 
 footer {
   background: transparent;
-  border-top: 1.4px dashed #e0e0f3;
+  border-top: 1.4px dashed #3d3aed;
   color: #6f6d99;
   padding: 22px 8vw 17px 8vw;
   font-family: inherit;
@@ -596,7 +662,6 @@ footer {
   text-align: center;
   margin-top: 38px;
   position: relative;
-  bottom: 0;
   width: 100%;
 }
 body.dark footer {

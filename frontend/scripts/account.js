@@ -3,6 +3,21 @@ console.log(token)
 const payload = JSON.parse(window.atob(token.split('.')[1]));
 const userId = payload.userID; 
 
+window.addEventListener('DOMContentLoaded', () => {
+    const savedColor = localStorage.getItem('mainColor');
+    const savedFont = localStorage.getItem('mainFont');
+
+    if(savedColor) document.body.style.color = savedColor;
+    if(savedFont) document.body.style.fontFamily = savedFont;
+
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, label, header, footer, main, .form-card'
+    ).forEach(el => {
+        if(savedColor) el.style.color = savedColor;
+        if(savedFont) el.style.fontFamily = savedFont;
+    });
+});
+
+
 
 window.onload = () => {
     fetch("http://localhost:5000/user", {
@@ -58,10 +73,7 @@ if (AccountForm) {
       const data = await res.json();
       document.getElementById("h2").innerHTML = data.message;
     } catch (error) {
-      // console.error(error);
       alert("Une erreur est survenue lors de la création du compte.");
     }
   });
 }
-        
-    

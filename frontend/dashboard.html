@@ -8,16 +8,17 @@
 </head>
 <body>
   <header>
-    <h1><a href="index.html">NoteFlow</a></h1>
+    <h1 id="title"><a href="index.html">NoteFlow</a></h1>
     <button class="menu-toggle" aria-label="Ouvrir le menu">☰</button>
     <nav id="navLinks">
-      <a href="moncompte.html" class="style-btn"><span class="icon">👤</span>Mon compte</a>
+      <button id="Accountbtn" class="style-btn"><span class="icon">👤</span>Mon compte</a>
       <button id="kanbanBtn" class="style-btn"><span class="icon">📋</span>Kanban</button>
       <button id="timelineBtn" class="style-btn"><span class="icon">🕒</span>Chronologie</button>
       <button id="styleBtn" class="style-btn"><span class="icon">🎨</span>Style</button>
+      <button id="Logoutbtn" class="style-btn"><span class="icon">🔌</span>Déconnexion</button>
       <div class="switch">
-        <input type="checkbox" id="themeToggle">
-        <label for="themeToggle" class="slider"></label>
+      <button id="themeToggle" class="style-btn"><span class="icon">🌙</span></button>
+
       </div>
     </nav>
   </header>
@@ -58,7 +59,6 @@
       <input type="text" id="taskTitle" placeholder="Titre">
       <input type="date" id="taskDue_time" placeholder="Due time">
       <textarea id="taskDesc" placeholder="Description"></textarea>
-      <input type="color" id="taskColor" value="#274ae6">
       <button class="style-btn" onclick="saveTask()">Enregistrer</button>
       <button class="style-btn" onclick="closeTaskModal()">Fermer</button>
     </div>
@@ -83,8 +83,24 @@
   </div>
   <button id="helpBtn">?</button>
   <div class="help-popup">Besoin d'aide ? Voici comment fonctionne le dashboard... (info, support, etc.)</div>
-  <footer>…</footer>
+  <footer>
+    <div>
+    <span>© 2025 NoteFlow &ndash; Tous droits réservés</span>
+    &middot;
+    <a href="mentions.html" class="footer-link">Mentions légales</a>
+    &middot;
+    <a href="about.html" class="footer-link">À propos du site</a>
+    </div>
+  <div class="footer-links">
+    <button class="social-btn" onclick="window.open('https://github.com/LeMatt28', '_blank')">GitHub Mattéo</button>
+    <button class="social-btn" onclick="window.open('https://github.com/celiacml', '_blank')">GitHub Celia</button>
+    <button class="social-btn" onclick="window.open('https://github.com/LouiSvon', '_blank')">GitHub Louis</button>
+    <button class="social-btn" onclick="window.open('https://github.com/MathiasR83', '_blank')">GitHub Mathias</button>
+  </div>
+  </footer>
 </body>
 </html>
 <script src="scripts/dashboard.js"></script>
+<script src="./script.js"></script>
+
 </html>

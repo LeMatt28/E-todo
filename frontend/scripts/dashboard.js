@@ -91,7 +91,6 @@ function openTaskModal(status, id=null) {
   document.getElementById('taskTitle').value = '';
   document.getElementById('taskDesc').value = '';
   document.getElementById('taskDue_time').value = '';
-  document.getElementById('taskColor').value = '#6b00ff';
   editedTaskId = null;
   document.getElementById('modalTitle').innerText = id ? "Modifier tâche" : "Nouvelle tâche";
   if(id){
@@ -112,7 +111,6 @@ function saveTask(){
   let title = document.getElementById('taskTitle').value.trim();
   let description = document.getElementById('taskDesc').value.trim();
   let due_time = document.getElementById('taskDue_time').value.trim();
-  let color = document.getElementById('taskColor').value;
   if(!title) return showToast("Titre obligatoire !", false);
   // if(!description) return showToast("Description obligatoire !", false);
   // if(!due_time) return showToast("Date limite obligatoire !", false);
@@ -138,7 +136,6 @@ function saveTask(){
         let t = tasks.find(t=>t.id===editedTaskId);
         t.title = title; 
         t.description = description; 
-        t.color = color;
         t.due_time = due_time
 
         
@@ -262,7 +259,26 @@ function applyStyle(){
 // Theme / Mode sombre
 document.getElementById('themeToggle').onchange = ()=> {
   document.body.classList.toggle('dark');
+
 };
+
+
+const logout = document.getElementById('Logoutbtn');
+
+if (logout) {
+  logout.addEventListener('click', () => {
+    localStorage.removeItem("token");
+    window.location.href = "index.html";
+  });
+}
+
+const accountbtn = document.getElementById('Accountbtn');
+
+if (accountbtn) {
+  accountbtn.addEventListener('click', () => {
+    window.location.href = "moncompte.html";
+  });
+}
 
 // Toaster notification bloc note
 function showToast(message, ok=true){
@@ -283,3 +299,49 @@ function showToast(message, ok=true){
   document.body.appendChild(toast);
   setTimeout(()=>{ toast.remove(); },1500);
 }
+
+
+window.addEventListener('DOMContentLoaded', () => {
+    const styleBtn = document.getElementById('styleBtn');
+    const styleModal = document.getElementById('styleModal');
+    const mainColorInput = document.getElementById('mainColorInput');
+    const fontSelect = document.getElementById('fontSelect');
+
+    const savedColor = localStorage.getItem('mainColor');
+    const savedFont = localStorage.getItem('mainFont');
+
+    if(savedColor) {
+      document.body.style.color = savedColor;}
+    if(savedFont) 
+      {document.body.style.fontFamily = savedFont;}
+
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, label, header, footer, main, .kanban-task, .timeline-item, .modal-content').forEach(el => {
+        if(savedColor) el.style.color = savedColor;
+        if(savedFont) el.style.fontFamily = savedFont;
+    });
+
+    styleBtn.onclick = () => {
+        styleModal.style.display = 'flex';
+    };
+
+    window.closeStyleModal = () => {
+        styleModal.style.display = 'none';
+    };
+
+    window.applyStyle = () => {
+        const color = mainColorInput.value;
+        const font = fontSelect.value;
+
+        document.body.style.color = color;
+        document.body.style.fontFamily = font;
+        document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, label, header, footer, main, .kanban-task, .timeline-item, .modal-content').forEach(el => {
+            el.style.color = color;
+            el.style.fontFamily = font;
+        });
+
+        localStorage.setItem('mainColor', color);
+        localStorage.setItem('mainFont', font);
+
+        closeStyleModal();
+    };
+});
