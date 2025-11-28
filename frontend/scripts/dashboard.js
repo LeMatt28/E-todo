@@ -315,6 +315,14 @@ window.addEventListener('DOMContentLoaded', () => {
     if(savedFont) 
       {document.body.style.fontFamily = savedFont;}
 
+    const header = document.querySelector('header')
+    const footer = document.querySelector('footer')
+
+    if (savedColor) {
+      if (header) header.style.borderColor = savedColor;
+      if (footer) footer.style.borderColor = savedColor;
+    }
+
     document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, label, header, footer, main, .kanban-task, .timeline-item, .modal-content').forEach(el => {
         if(savedColor) el.style.color = savedColor;
         if(savedFont) el.style.fontFamily = savedFont;
@@ -337,6 +345,8 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, label, header, footer, main, .kanban-task, .timeline-item, .modal-content').forEach(el => {
             el.style.color = color;
             el.style.fontFamily = font;
+
+            if (el.tagName === "HEADER" || el.tagName === "FOOTER") el.style.borderColor = color;
         });
 
         localStorage.setItem('mainColor', color);

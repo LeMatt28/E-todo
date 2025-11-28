@@ -110,3 +110,80 @@ if (registerForm) {
   });
 }
 
+
+// Toaster notification bloc note
+function showToast(message, ok=true){
+  let toast = document.createElement('div');
+  toast.textContent = message;
+  toast.style.position = "fixed";
+  toast.style.right = "18px";
+  toast.style.bottom = "18px";
+  toast.style.background = ok ? "#e7fbe7" : "#ffecec";
+  toast.style.color = ok ? "#168054" : "#c52c2c";
+  toast.style.padding = "9px 17px";
+  toast.style.borderRadius = "8px";
+  toast.style.border = "1.2px dashed " + (ok ? "#4be1b1" : "#c52c2c");
+  toast.style.fontFamily = "'Fira Mono', 'Roboto Mono', monospace";
+  toast.style.boxShadow = "0 2px 16px rgba(60,88,32,0.13)";
+  toast.style.zIndex = 1200;
+  toast.style.opacity = "0.96";
+  document.body.appendChild(toast);
+  setTimeout(()=>{ toast.remove(); },1500);
+}
+
+
+window.addEventListener('DOMContentLoaded', () => {
+    const styleBtn = document.getElementById('styleBtn');
+    const styleModal = document.getElementById('styleModal');
+    const mainColorInput = document.getElementById('mainColorInput');
+    const fontSelect = document.getElementById('fontSelect');
+
+    const savedColor = localStorage.getItem('mainColor');
+    const savedFont = localStorage.getItem('mainFont');
+
+    if(savedColor) {
+      document.body.style.color = savedColor;}
+    if(savedFont) 
+      {document.body.style.fontFamily = savedFont;}
+
+    const header = document.querySelector('header')
+    const footer = document.querySelector('footer')
+
+    if (savedColor) {
+      if (header) header.style.borderColor = savedColor;
+      if (footer) footer.style.borderColor = savedColor;
+    }
+
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, label, header, footer, main, .kanban-task, .timeline-item, .modal-content').forEach(el => {
+        if(savedColor) el.style.color = savedColor;
+        if(savedFont) el.style.fontFamily = savedFont;
+    });
+
+    styleBtn.onclick = () => {
+        styleModal.style.display = 'flex';
+    };
+
+    window.closeStyleModal = () => {
+        styleModal.style.display = 'none';
+    };
+
+    window.applyStyle = () => {
+        const color = mainColorInput.value;
+        const font = fontSelect.value;
+
+        document.body.style.color = color;
+        document.body.style.fontFamily = font;
+        document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, label, header, footer, main, .kanban-task, .timeline-item, .modal-content').forEach(el => {
+            el.style.color = color;
+            el.style.fontFamily = font;
+
+            if (el.tagName === "HEADER" || el.tagName === "FOOTER") el.style.borderColor = color;
+          
+        });
+
+        localStorage.setItem('mainColor', color);
+        localStorage.setItem('mainFont', font);
+
+        closeStyleModal();
+    };
+});
