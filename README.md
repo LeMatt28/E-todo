@@ -3,7 +3,7 @@
 # DESCRIPTION:
 
 Application e-todo Full Stack permettant de créer et de gérer une liste de tâches créer et gérer une liste de tâches
-Le projet fonctionne sur un frontend en HTML / CSS / JS [ou REACT que nous avons testé (mais pas mis en place)] intégration d’un Docker compose et deux dockerfile pour l’héberger afin d’accélérer l’installation et le lancement.
+Le projet fonctionne sur un frontend en HTML / CSS / JS [ou REACT que nous avons testé (mais pas mis en place)], un backend avec NODE JS EXPRESS et une base de donnée SQL. Intégration d’un Docker compose et deux dockerfile pour l’héberger afin d’accélérer l’installation et le lancement.
 
 ## _Packages_
 
@@ -37,7 +37,6 @@ Créez un fichier .env dans lequel à l'intérieur tu rajoute:
 
         PORT=[Le port du backend]
         SECRET=[vôtre phrase secrète]
-
 
 ## Installation du fichier:
 
