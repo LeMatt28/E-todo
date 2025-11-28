@@ -11,23 +11,23 @@
   <h1><a href="index.html">NoteFlow</a></h1>
   <button class="menu-toggle">☰</button>
   <nav id="navLinks">
-    <a href="index.html">Connexion</a>
+    <a href="index.html" class="style-btn"><span class="icon">🔐</span>Se connecter</a>
     <div class="switch">
-      <input type="checkbox" id="themeSwitch">
-      <label for="themeSwitch" class="slider"></label>
+    <button id="themeToggle" class="style-btn"><span class="icon">🌙</span></button>
+
     </div>
   </nav>
 </header>
 
   <main>
-    <form action="http://localhost:5000/register" class="login-form" id="registerForm" method="POST">
+    <form action="http://localhost:5000/register" class="form-card" id="registerForm" method="POST">
       <h2 id="h2">Créer un compte</h2>
-      <input type="email" name="email" id="regEmail" placeholder="Email" required>
-      <input type="text" name="name" id="regName" placeholder="Nom" required>
-      <input type="text" name="firstname" id="regFirstname" placeholder="Prénom" required>
-      <input type="password" name="password" id="regPassword" placeholder="Mot de passe" required>
-      <input type="password" id="regConfirmPassword" placeholder="Confirmer le mot de passe" required>
-      <button type="submit">S'inscrire</button>
+      <input type="email" name="email" id="email" placeholder="Email" required>
+      <input type="text" name="name" id="lastname" placeholder="Nom" required>
+      <input type="text" name="firstname" id="firstname" placeholder="Prénom" required>
+      <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+      <input type="password" id="confirmPassword" placeholder="Confirmer le mot de passe" required>
+      <button type="submit" class="btn">S'inscrire</button>
     </form>
   </main>
 

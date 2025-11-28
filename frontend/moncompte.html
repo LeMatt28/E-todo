@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteFlow - Mon compte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1><a href="index.html">NoteFlow</a></h1>
+  <button class="menu-toggle">☰</button>
+  <nav id="navLinks">
+    <button id="kanbanBtn" class="style-btn"><span class="icon">📋</span>Dashboard</button>
+    <div class="switch">
+      <button id="themeToggle" class="style-btn"><span class="icon">🌙</span></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <form  action="http://localhost:5000/user" class="form-card" id="accountForm" method="POST">
+    <h2 id="h2">Mon compte</h2>
+
+    <input
+      type="text"
+      id="accFirstName"
+      name="firstname"
+      placeholder="Prénom"
+      required
+    >
+    <input
+      type="text"
+      id="accLastName"
+      name="lastname"
+      placeholder="Nom"
+      required
+    >
+    <input
+      type="email"
+      id="accEmail"
+      name="email"
+      placeholder="Email"
+      required
+    >
+
+    <input
+      type="password"
+      id="accPassword"
+      name="password"
+      placeholder="Nouveau mot de passe (optionnel)"
+    >
+    <input
+      type="password"
+      id="accPasswordConfirm"
+      name="confirmPassword"
+      placeholder="Confirmer le mot de passe"
+    >
+
+    <button type="submit" class="btn">Mettre à jour</button>
+  </form>
+</main>
+
+<button id="helpBtn">?</button>
+<div class="help-popup">Besoin d'aide ? Contactez support@noteflow.com</div>
+
+<footer>
+  <div>
+    <span>© 2025 NoteFlow &ndash; Tous droits réservés</span>
+    &middot;
+    <a href="mentions.html" class="footer-link">Mentions légales</a>
+    &middot;
+    <a href="about.html" class="footer-link">À propos du site</a>
+  </div>
+  <div class="footer-links">
+    <button class="social-btn" onclick="window.open('https://github.com/LeMatt28', '_blank')">LinkedIn Membre 1</button>
+    <button class="social-btn" onclick="window.open('https://github.com/celiacml', '_blank')">LinkedIn Membre 2</button>
+    <button class="social-btn" onclick="window.open('https://github.com/LouiSvon', '_blank')">GitHub Membre 3</button>
+    <button class="social-btn" onclick="window.open('https://github.com/MathiasR83', '_blank')">GitHub Membre 4</button>
+  </div>
+</footer>
+
+<script src="./scripts/account.js"></script>
+<script src="./script.js"></script>
+
+</body>
+</html>

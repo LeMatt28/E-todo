@@ -1,3 +1,8 @@
+CREATE USER IF NOT EXISTS 'etodo_user'@'%' IDENTIFIED BY 'MotDePasseEtodoUser';
+GRANT ALL PRIVILEGES ON etodo.* TO 'etodo_user'@'%';
+FLUSH PRIVILEGES;
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1deb3
 -- https://www.phpmyadmin.net/
@@ -29,13 +34,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `todo` (
   `id` int NOT NULL,
-  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` text NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `due_time` datetime NOT NULL,
   `status` enum('not started','todo','in progress','done') DEFAULT 'not started',
   `user_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `todo`
@@ -57,7 +62,7 @@ CREATE TABLE `user` (
   `name` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `user`
