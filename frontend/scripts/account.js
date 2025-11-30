@@ -4,6 +4,8 @@ const payload = JSON.parse(window.atob(token.split('.')[1]));
 const userId = payload.userID; 
 
 window.addEventListener('DOMContentLoaded', () => {
+
+
     const savedColor = localStorage.getItem('mainColor');
     const savedFont = localStorage.getItem('mainFont');
 
@@ -41,6 +43,19 @@ window.onload = () => {
     })
 }
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const dashboardBtn = document.getElementById('kanbanBtn');
+    if (dashboardBtn) {
+        dashboardBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Clic sur Dashboard détecté');
+            window.location.href = 'dashboard.html';
+        });
+    }
+});
+
+
 const AccountForm = document.getElementById('accountForm');
 if (AccountForm) {
   AccountForm.addEventListener('submit', async (e) => {
@@ -77,3 +92,4 @@ if (AccountForm) {
     }
   });
 }
+

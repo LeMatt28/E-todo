@@ -46,7 +46,7 @@ services:
     build: ./frontend
     container_name: frontend_etodo
     ports:
-      - "3000:80"
+      - "3001:80"
     networks:
       - back
 
